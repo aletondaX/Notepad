@@ -2,29 +2,34 @@
 
 Notepad clásico de Windows con fixes y optimizaciones. La traducción al español es de mi autoría.
 
-Optimizaciones y Fixes por [Alex313031](https://github.com/Alex313031/Notepad-NT):
+
+Optimizaciones & Fixes por [Alex313031](https://github.com/Alex313031/Notepad-NT):
 
  - Sets de instrucciones [SSE2](https://en.wikipedia.org/wiki/SSE2) y [SIMD](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data).
  - Opción del compilador [/O2](https://learn.microsoft.com/es-es/cpp/build/reference/o1-o2-minimize-size-maximize-speed) para una optimización máxima.
  - Se removieron variables indefinidas del código fuente.
- - Agregado 'Ctrl+Shift+S' para abrir la ventana de "Guardar como".
- - Ahora es posible activar "Ajuste de línea" y "Barra de estado" al mismo tiempo.
+ - Agregado atajo ´Ctrl+Shift+S´ para abrir la ventana de "Guardar como".
 
-Agregados míos:
 
+Mejoras por aletondaX:
+
+ - Traducción al Español.
  - "Seleccionar todo" se puede hacer tanto con `Ctrl+E` como con `Ctrl+A`.
  - "Buscar" se puede hacer tanto con `Ctrl+B` como con `Ctrl+F`.
  - "Reemplazar" se puede hacer tanto con `Ctrl+R` como con `Ctrl+H`.
- - Eliminadas de los menúes opciones que no se usan, tales como "Imprimir", "Configurar página", "Ayuda", "Acerca de".
+ - Eliminadas de los menúes opciones irrelevantes, tales como "Imprimir", "Configurar página", "Ayuda", "Acerca de".
  - Barra de estado habilitada por defecto.
  - Agregado atajo `Alt+Z` para alternar el "Ajuste de línea".
+
 
 To-Do:
 
  - Importante: arreglar el tema de los caracteres especiales.
  - Usar un ícono de menor resolución para alivianar ejecutable.
+ - Remover todo el código relacionado a la impresión.
 
 Funciona desde Windows XP hasta Windows 10. En Windows 11 NO funciona correctamente.
+
 
 ### Compilar
 

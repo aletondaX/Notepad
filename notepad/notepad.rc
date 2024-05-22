@@ -42,194 +42,213 @@ FILEOS          VER_FILEOS
 FILETYPE        VER_FILETYPE
 FILESUBTYPE     VER_FILESUBTYPE
 BEGIN
-    BLOCK "StringFileInfo"
-    BEGIN
-        BLOCK "040904B0"
-        BEGIN
-            VALUE "CompanyName",      VER_COMPANYNAME_STR
-            VALUE "FileDescription",  VER_FILEDESCRIPTION_STR
-            VALUE "FileVersion",      VER_FILEVERSION_STR
-            VALUE "InternalName",     VER_INTERNALNAME_STR
-            VALUE "LegalCopyright",   VER_LEGALCOPYRIGHT_STR
-            VALUE "OriginalFilename", VER_ORIGINALFILENAME_STR
-            VALUE "ProductName",      VER_PRODUCTNAME_STR
-            VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
-            VALUE "Comments",         VER_COMMENTS_STR
-        END
-    END
+BLOCK "StringFileInfo"
+BEGIN
+BLOCK "040904B0"
+BEGIN
+VALUE "CompanyName", VER_COMPANYNAME_STR
+VALUE "FileDescription", VER_FILEDESCRIPTION_STR
+VALUE "FileVersion", VER_FILEVERSION_STR
+VALUE "InternalName", VER_INTERNALNAME_STR
+VALUE "LegalCopyright", VER_LEGALCOPYRIGHT_STR
+VALUE "OriginalFilename", VER_ORIGINALFILENAME_STR
+VALUE "ProductName", VER_PRODUCTNAME_STR
+VALUE "ProductVersion", VER_PRODUCTVERSION_STR
+VALUE "Comments", VER_COMMENTS_STR
+END
+END
 
-    BLOCK "VarFileInfo"
-    BEGIN
-        /* The following line should only be modified for localized versions.     */
-        /* It consists of any number of WORD,WORD pairs, with each pair           */
-        /* describing a language,codepage combination supported by the file.      */
-        /*                                                                        */
-        /* For example, a file might have values "0x409,1252" indicating that it  */
-        /* supports English language (0x409) in the Windows ANSI codepage (1252). */
+BLOCK "VarFileInfo"
+BEGIN
+/* The following line should only be modified for localized versions.     */
+/* It consists of any number of WORD,WORD pairs, with each pair           */
+/* describing a language,codepage combination supported by the file.      */
+/*                                                                        */
+/* For example, a file might have values "0x409,1252" indicating that it  */
+/* supports English language (0x409) in the Windows ANSI codepage (1252). */
 
-        VALUE "Translation", 0x40A, 850
+VALUE "Translation", 0x40A, 1252
 
-    END
+END
 END
 
 ID_ICON    ICON PRELOAD DISCARDABLE     notepad.ico
 
 ID_MENUBAR  MENU PRELOAD DISCARDABLE
 BEGIN
-    POPUP   "Archivo"
-        BEGIN
-            MENUITEM    "Nuevo\tCtrl+N",                         M_NEW
-            MENUITEM    "Abrir...\tCtrl+O",                     M_OPEN
-            MENUITEM    "&Guardar\tCtrl+S",                        M_SAVE
-            MENUITEM    "Guardar como...\tCtrl+Shift+S",            M_SAVEAS
-            MENUITEM    SEPARATOR
-            MENUITEM    "Salir",                                M_EXIT
-        END
+POPUP   "Archivo"
+BEGIN
+MENUITEM    "Nuevo\tCtrl+N", M_NEW
+MENUITEM    "Abrir...\tCtrl+O", M_OPEN
+MENUITEM    "&Guardar\tCtrl+S", M_SAVE
+MENUITEM    "Guardar como...\tCtrl+Shift+S", M_SAVEAS
+MENUITEM    SEPARATOR
+//MENUITEM    "Page Set&up...",                       M_PAGESETUP
+//MENUITEM    "&Print...\tCtrl+P",                    M_PRINT
+//MENUITEM    SEPARATOR
+MENUITEM    "Salir", M_EXIT
+END
 
-    POPUP   "EdiciÃ³n"
-        BEGIN
-            MENUITEM    "Deshacer\tCtrl+Z",        M_UNDO
-            MENUITEM    SEPARATOR
-            MENUITEM    "Cortar\tCtrl+X",         M_CUT ,  GRAYED
-            MENUITEM    "Copiar\tCtrl+C",        M_COPY,  GRAYED
-            MENUITEM    "Pegar\tCtrl+V",       M_PASTE, GRAYED
-            MENUITEM    "Eliminar\tDel",         M_CLEAR, GRAYED
-            MENUITEM    SEPARATOR
-            MENUITEM    "Buscar...\tCtrl+F / Ctrl+B",     M_FIND
-            MENUITEM    "Buscar siguiente\tF3",       M_FINDNEXT
-            MENUITEM    "Reemplazar...\tCtrl+H / Ctrl+R",  M_REPLACE
+POPUP   "Edición"
+BEGIN
+MENUITEM    "Deshacer\tCtrl+Z", M_UNDO
+MENUITEM    SEPARATOR
+MENUITEM    "Cortar\tCtrl+X", M_CUT, GRAYED
+MENUITEM    "Copiar\tCtrl+C", M_COPY, GRAYED
+MENUITEM    "Pegar\tCtrl+V", M_PASTE, GRAYED
+MENUITEM    "Eliminar\tDel", M_CLEAR, GRAYED
+MENUITEM    SEPARATOR
+MENUITEM    "Buscar...\tCtrl+F / Ctrl+B", M_FIND
+MENUITEM    "Buscar siguiente\tF3", M_FINDNEXT
+MENUITEM    "Reemplazar...\tCtrl+H / Ctrl+R", M_REPLACE
 /*
-            The hotkey used for replace is CTRL-H in most of the editors, and hence though 
-            this key may conflict with backspace key in IMEs, this key is used here to be compatible
-            with all the editors. Please contact ChrisW/RajeshM for more details.
+			The hotkey used for replace is CTRL-H in most of the editors, and hence though
+			this key may conflict with backspace key in IMEs, this key is used here to be compatible
+			with all the editors. Please contact ChrisW/RajeshM for more details.
 */
-            MENUITEM    SEPARATOR
-            MENUITEM    "Seleccionar todo\tCtrl+A / Ctrl+E",  M_SELECTALL
-            MENUITEM    "Hora y fecha\tF5",       M_DATETIME
-        END
+//MENUITEM    "&Go To...\tCtrl+G",    M_GOTO
+MENUITEM    SEPARATOR
+MENUITEM    "Seleccionar todo\tCtrl+A / Ctrl+E", M_SELECTALL
+MENUITEM    "Hora y fecha\tF5", M_DATETIME
+END
 
-    POPUP   "Formato"
-        BEGIN
-            MENUITEM    "Ajuste de lÃ­nea"      M_WW
-            MENUITEM    "Fuente...",       M_SETFONT
-        END
+POPUP   "Formato"
+BEGIN
+MENUITEM    "Ajuste de línea"       M_WW
+MENUITEM    "Fuente...", M_SETFONT
+END
 
-    POPUP   "Ver"
-        BEGIN
-            MENUITEM "Barra de estado",             M_STATUSBAR
-        END
+POPUP   "Ver"
+BEGIN
+MENUITEM "Barra de estado", M_STATUSBAR
+END
+
+//POPUP "&Help"
+//BEGIN
+//MENUITEM     "&View Help",  M_HELP
+//MENUITEM     SEPARATOR
+//MENUITEM     "&About Notepad NT",M_ABOUT
+//END
 
 END
 
 MainAcc ACCELERATORS PRELOAD DISCARDABLE
 BEGIN
-    "N",       M_NEW,      VIRTKEY, CONTROL
-    "O",       M_OPEN,     VIRTKEY, CONTROL
-    "S",       M_SAVE,     VIRTKEY, CONTROL
-    "S",       M_SAVEAS,   VIRTKEY, CONTROL, SHIFT
-    VK_F3,     M_FINDNEXT, VIRTKEY
-    VK_F5,     M_DATETIME, VIRTKEY
-    "F",       M_FIND    , VIRTKEY, CONTROL, NOINVERT
-    "B",       M_FIND    , VIRTKEY, CONTROL, NOINVERT
-    "H",       M_REPLACE,  VIRTKEY, CONTROL, NOINVERT
-    "R",       M_REPLACE,  VIRTKEY, CONTROL, NOINVERT
-    VK_BACK,   M_UNDO,     VIRTKEY, ALT
-    "Z",       M_UNDO,     VIRTKEY, CONTROL
-    "X",       M_CUT,      VIRTKEY, CONTROL
-    "C",       M_COPY,     VIRTKEY, CONTROL
-    "V",       M_PASTE,    VIRTKEY, CONTROL
-    "A",       M_SELECTALL,VIRTKEY, CONTROL
-    "E",       M_SELECTALL,VIRTKEY, CONTROL
-    "Z",       M_WW,       VIRTKEY, ALT
+"N", M_NEW, VIRTKEY, CONTROL
+"O", M_OPEN, VIRTKEY, CONTROL
+"S", M_SAVE, VIRTKEY, CONTROL
+"S", M_SAVEAS, VIRTKEY, CONTROL, SHIFT
+//"P",       M_PRINT,    VIRTKEY, CONTROL
+//VK_INSERT, M_COPY, VIRTKEY, CONTROL
+//VK_F1,     M_HELP,     VIRTKEY
+VK_F3, M_FINDNEXT, VIRTKEY
+VK_F5, M_DATETIME, VIRTKEY
+//"G",       M_GOTO,     VIRTKEY, CONTROL
+"F", M_FIND, VIRTKEY, CONTROL, NOINVERT
+"B", M_FIND, VIRTKEY, CONTROL, NOINVERT
+"H", M_REPLACE, VIRTKEY, CONTROL, NOINVERT
+"R", M_REPLACE, VIRTKEY, CONTROL, NOINVERT
+VK_BACK, M_UNDO, VIRTKEY, ALT
+"Z", M_UNDO, VIRTKEY, CONTROL
+"X", M_CUT, VIRTKEY, CONTROL
+"C", M_COPY, VIRTKEY, CONTROL
+"V", M_PASTE, VIRTKEY, CONTROL
+"A", M_SELECTALL, VIRTKEY, CONTROL
+"E", M_SELECTALL, VIRTKEY, CONTROL
+"Z", M_WW, VIRTKEY, ALT
 END
 
 /* Allow exit using ^C, ^D or ^Z during Setup */
 SlipUpAcc ACCELERATORS PRELOAD DISCARDABLE
 BEGIN
-    "N",       M_NEW,      VIRTKEY, CONTROL
-    "O",       M_OPEN,     VIRTKEY, CONTROL
-    "S",       M_SAVE,     VIRTKEY, CONTROL
-    VK_F3,     M_FINDNEXT, VIRTKEY
-    VK_F5,     M_DATETIME, VIRTKEY
-    "F",       M_FIND,     VIRTKEY, CONTROL, NOINVERT
-    "H",       M_REPLACE,  VIRTKEY, CONTROL, NOINVERT
-    VK_BACK,   M_UNDO,     VIRTKEY, ALT
-    "Z",       M_UNDO,     VIRTKEY, CONTROL
-    "X",       M_CUT,      VIRTKEY, CONTROL
-    "C",       M_COPY,     VIRTKEY, CONTROL
-    "V",       M_PASTE,    VIRTKEY, CONTROL
-    "A",       M_SELECTALL,VIRTKEY, CONTROL
-    VK_ESCAPE, M_EXIT,     VIRTKEY
-    0x43,      M_EXIT,     VIRTKEY, CONTROL
-    0x44,      M_EXIT,     VIRTKEY, CONTROL
-    0x5A,      M_EXIT,     VIRTKEY, CONTROL
+"N", M_NEW, VIRTKEY, CONTROL
+"O", M_OPEN, VIRTKEY, CONTROL
+"S", M_SAVE, VIRTKEY, CONTROL
+//"P",       M_PRINT,    VIRTKEY, CONTROL
+//VK_INSERT, M_COPY, VIRTKEY, CONTROL
+//VK_F1,     M_HELP,     VIRTKEY
+VK_F3, M_FINDNEXT, VIRTKEY
+VK_F5, M_DATETIME, VIRTKEY
+//"G",       M_GOTO,     VIRTKEY, CONTROL
+"F", M_FIND, VIRTKEY, CONTROL, NOINVERT
+"H", M_REPLACE, VIRTKEY, CONTROL, NOINVERT
+VK_BACK, M_UNDO, VIRTKEY, ALT
+"Z", M_UNDO, VIRTKEY, CONTROL
+"X", M_CUT, VIRTKEY, CONTROL
+"C", M_COPY, VIRTKEY, CONTROL
+"V", M_PASTE, VIRTKEY, CONTROL
+"A", M_SELECTALL, VIRTKEY, CONTROL
+VK_ESCAPE, M_EXIT, VIRTKEY
+0x43, M_EXIT, VIRTKEY, CONTROL
+0x44, M_EXIT, VIRTKEY, CONTROL
+0x5A, M_EXIT, VIRTKEY, CONTROL
 END
 
 STRINGTABLE PRELOAD DISCARDABLE
 BEGIN
-    IDS_MERGE1       "%%"
-    IDS_DISKERROR   "Cannot open the %% file.\n\nMake sure a disk is in the drive you specified."
-    IDS_FNF         "Cannot find the %% file.\n\nDo you want to create a new file?"
-    IDS_SCBC        "El texto dentro del archivo %% ha cambiado.\n\nÂ¿Quieres guardar los cambios?"
-    IDS_UNTITLED    "Sin tÃ­tulo"
-    IDS_NOTEPAD     " - Bloc de notas"
-    IDS_CFS         "No se encontrÃ³ ""%%"""
-    /* The following is a generic out of memory message which can also be
-       system modal so no /n can appear in it. */
-    IDS_ERRSPACE    "Not enough memory available to complete this operation. Quit one or more applications to increase available memory, and then try again."
-    IDS_FTL         "The %% file is too large for Notepad NT.\n\nUse another editor to edit the file."
-    IDS_NN          "Bloc de notas"
-    IDS_COMMDLGINIT "Failed to Initialize File Dialogs. Change the Filename and try again."
-    IDS_PRINTDLGINIT "Failed to Initialize Print Dialogs. Make sure that your printer is connected properly and use Control Panel to verify that the printer is configured properly."
-    IDS_CANTPRINT   "Cannot print the %% file. Be sure that your printer is connected properly and use Control Panel to verify that the printer is configured properly."
-    IDS_NVF         "Not a valid file name."
-    IDS_CREATEERR   "Cannot create the %% file.\n\nMake sure that the path and filename are correct."
-    IDS_NOWW        "Cannot carry out the Word Wrap command because there is too much text in the file."
-    IDS_HELPFILE    "notepad.hlp"
-    IDS_HEADER      "&f"
-    IDS_FOOTER      "Page &p"
+IDS_MERGE1       "%%"
+IDS_DISKERROR   "Cannot open the %% file.\n\nMake sure a disk is in the drive you specified."
+IDS_FNF         "Cannot find the %% file.\n\nDo you want to create a new file?"
+IDS_SCBC        "El texto dentro del archivo %% ha cambiado.\n\n¿Quieres guardar los cambios?"
+IDS_UNTITLED    "Sin título"
+IDS_NOTEPAD     " - Bloc de notas"
+IDS_CFS         "No se encontró ""%%"""
+/* The following is a generic out of memory message which can also be
+   system modal so no /n can appear in it. */
+	IDS_ERRSPACE    "Not enough memory available to complete this operation. Quit one or more applications to increase available memory, and then try again."
+	IDS_FTL         "The %% file is too large for Notepad NT.\n\nUse another editor to edit the file."
+	IDS_NN          "Bloc de notas"
+	IDS_COMMDLGINIT "Failed to Initialize File Dialogs. Change the Filename and try again."
+	IDS_PRINTDLGINIT "Failed to Initialize Print Dialogs. Make sure that your printer is connected properly and use Control Panel to verify that the printer is configured properly."
+	IDS_CANTPRINT   "Cannot print the %% file. Be sure that your printer is connected properly and use Control Panel to verify that the printer is configured properly."
+	IDS_NVF         "Not a valid file name."
+	IDS_CREATEERR   "Cannot create the %% file.\n\nMake sure that the path and filename are correct."
+	IDS_NOWW        "Cannot carry out the Word Wrap command because there is too much text in the file."
+	IDS_HELPFILE    "notepad.hlp"
+	IDS_HEADER      "&f"
+	IDS_FOOTER      "Page &p"
 
-    IDS_ACCESSDENY  "%%\nYou do not have permission to open this file.  See the owner of the file or an administrator to obtain permission."
+	IDS_ACCESSDENY  "%%\nYou do not have permission to open this file.  See the owner of the file or an administrator to obtain permission."
 
 
-    IDS_ANSITEXT    "Documentos de texto (*.txt)" /* filter text for File/Open */
-    IDS_ALLFILES    "Todos los archivos"   /* filter text for File/Open  */
-    IDS_OPENCAPTION "Abrir"      /* title for file/open dialog */
-    IDS_SAVECAPTION "Guardar como"   /* title for file/save dialog */
-    IDS_CANNOTQUIT  "You cannot quit Windows because the Save As dialog\nbox in Notepad NT is open.  Switch to Notepad NT, close this\ndialog box, and then try quitting Windows again."
-    IDS_LOADDRVFAIL "Cannot access your printer.\nBe sure that your printer is connected properly and use Control Panel to verify that the printer is configured properly."
-    IDS_ERRUNICODE  "%%\n This file contains characters in Unicode format which will be lost if you save this file as an ANSI encoded text file. To keep the Unicode information, click Cancel below and then select one of the Unicode options from the Encoding drop down list. Continue?"
-    IDS_FONTTOOBIG  "Page too small to print one line.\nTry printing using smaller font."
-    IDS_COMMDLGERR  "Common Dialog error (0x%04x)"
+	IDS_ANSITEXT    "Documentos de texto (*.txt)" /* filter text for File/Open */
+	IDS_ALLFILES    "Todos los archivos"   /* filter text for File/Open  */
+	IDS_OPENCAPTION "Abrir"      /* title for file/open dialog */
+	IDS_SAVECAPTION "Guardar como"   /* title for file/save dialog */
+	IDS_CANNOTQUIT  "You cannot quit Windows because the Save As dialog\nbox in Notepad NT is open.  Switch to Notepad NT, close this\ndialog box, and then try quitting Windows again."
+	IDS_LOADDRVFAIL "Cannot access your printer.\nBe sure that your printer is connected properly and use Control Panel to verify that the printer is configured properly."
+	IDS_ERRUNICODE  "%%\n This file contains characters in Unicode format which will be lost if you save this file as an ANSI encoded text file. To keep the Unicode information, click Cancel below and then select one of the Unicode options from the Encoding drop down list. Continue?"
+	IDS_FONTTOOBIG  "Page too small to print one line.\nTry printing using smaller font."
+	IDS_COMMDLGERR  "Common Dialog error (0x%04x)"
 
-    IDS_LINEERROR    "Notepad NT - Goto Line"
-    IDS_LINETOOLARGE "Line number out of range"
+	IDS_LINEERROR    "Notepad NT - Goto Line"
+	IDS_LINETOOLARGE "Line number out of range"
 
-    IDS_FT_ANSI      "ANSI"
-    IDS_FT_UNICODE   "Unicode"
-    IDS_FT_UNICODEBE "Unicode big endian"
-    IDS_FT_UTF8      "UTF-8"
+	IDS_FT_ANSI      "ANSI"
+	IDS_FT_UNICODE   "Unicode"
+	IDS_FT_UNICODEBE "Unicode big endian"
+	IDS_FT_UTF8      "UTF-8"
 
-    IDS_CURRENT_PAGE "Page %d"  /* don't change %d; used for printf formatting */
+	IDS_CURRENT_PAGE "Page %d"  /* don't change %d; used for printf formatting */
 
-    IDS_LINECOL          "   LÃ­nea %d, Columna %d  "
-    IDS_COMPRESSED_FILE  " Compressed,"
-    IDS_ENCRYPTED_FILE   " Encrypted,"
-    IDS_HIDDEN_FILE      " Hidden,"
-    IDS_OFFLINE_FILE     " Offline,"
-    IDS_READONLY_FILE    " ReadOnly,"
-    IDS_SYSTEM_FILE      " System,"
-    IDS_FILE             " File"
+	IDS_LINECOL          "   Línea %d, Columna %d  "
+	IDS_COMPRESSED_FILE  " Compressed,"
+	IDS_ENCRYPTED_FILE   " Encrypted,"
+	IDS_HIDDEN_FILE      " Hidden,"
+	IDS_OFFLINE_FILE     " Offline,"
+	IDS_READONLY_FILE    " ReadOnly,"
+	IDS_SYSTEM_FILE      " System,"
+	IDS_FILE             " File"
 
-    /* Use by MUI, not notepad.  See hivecls.inx for reference */
+	/* Use by MUI, not notepad.  See hivecls.inx for reference */
 
-    IDS_TEXT_FRIENDLY_NAME  "Text Document"
+	IDS_TEXT_FRIENDLY_NAME  "Text Document"
 
-    /*  IDS_LETTERS     "fFpPtTdDcCrRlL"   Original US values.  This does get translated! */
-    /*                  The order is: File, Page, Time, Date, Center, Right, Left         */
+	/*  IDS_LETTERS     "fFpPtTdDcCrRlL"   Original US values.  This does get translated! */
+	/*                  The order is: File, Page, Time, Date, Center, Right, Left         */
 
-    IDS_LETTERS     "fFpPtTdDcCrRlL"
-END
+	IDS_LETTERS     "fFpPtTdDcCrRlL"
+	END
 
-/* Include other dialogs. */
-rcinclude notepad.dlg
+	/* Include other dialogs. */
+	rcinclude notepad.dlg

@@ -35,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="notepad.h" />
     <ClInclude Include="precomp.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="uconvert.h" />
     <ClInclude Include="uniconv.h" />
     <ClInclude Include="winnlsp.h" />
@@ -112,7 +113,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>true</GenerateManifest>
-    <TargetName>notepad-nt_x$(PlatformArchitecture)</TargetName>
+    <TargetName>notepad</TargetName>
     <OutDir>$(SolutionDir)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -233,6 +234,7 @@
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

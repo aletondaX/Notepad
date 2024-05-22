@@ -574,7 +574,7 @@ INT NPCommand(
     LONG     lSel;
     TCHAR    szNewName[MAX_PATH] = TEXT("");      /* New file name */
     LONG     style;
-    DWORD    rc;
+    //DWORD    rc;
     RECT     rcClient;
 
     switch (LOWORD(wParam))
