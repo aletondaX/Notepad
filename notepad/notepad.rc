@@ -76,58 +76,58 @@ ID_ICON    ICON PRELOAD DISCARDABLE     notepad.ico
 
 ID_MENUBAR  MENU PRELOAD DISCARDABLE
 BEGIN
-    POPUP   "&File"
+    POPUP   "Archivo"
         BEGIN
-            MENUITEM    "&New\tCtrl+N",                         M_NEW
-            MENUITEM    "&Open...\tCtrl+O",                     M_OPEN
-            MENUITEM    "&Save\tCtrl+S",                        M_SAVE
-            MENUITEM    "Save &As...\tCtrl+Shift+S",            M_SAVEAS
+            MENUITEM    "Nuevo\tCtrl+N",                         M_NEW
+            MENUITEM    "Abrir...\tCtrl+O",                     M_OPEN
+            MENUITEM    "&Guardar\tCtrl+S",                        M_SAVE
+            MENUITEM    "Guardar como...\tCtrl+Shift+S",            M_SAVEAS
             MENUITEM    SEPARATOR
-            MENUITEM    "Page Set&up...",                       M_PAGESETUP
-            MENUITEM    "&Print...\tCtrl+P",                    M_PRINT
+            MENUITEM    "Configurar página...",                       M_PAGESETUP
+            MENUITEM    "Imprimir...\tCtrl+P",                    M_PRINT
             MENUITEM    SEPARATOR
-            MENUITEM    "E&xit",                                M_EXIT
+            MENUITEM    "Salir",                                M_EXIT
         END
 
-    POPUP   "&Edit"
+    POPUP   "Edición"
         BEGIN
-            MENUITEM    "&Undo\tCtrl+Z",        M_UNDO
+            MENUITEM    "Deshacer\tCtrl+Z",        M_UNDO
             MENUITEM    SEPARATOR
-            MENUITEM    "Cu&t\tCtrl+X",         M_CUT ,  GRAYED
-            MENUITEM    "&Copy\tCtrl+C",        M_COPY,  GRAYED
-            MENUITEM    "&Paste\tCtrl+V",       M_PASTE, GRAYED
-            MENUITEM    "De&lete\tDel",         M_CLEAR, GRAYED
+            MENUITEM    "Cortar\tCtrl+X",         M_CUT ,  GRAYED
+            MENUITEM    "Copiar\tCtrl+C",        M_COPY,  GRAYED
+            MENUITEM    "Pegar\tCtrl+V",       M_PASTE, GRAYED
+            MENUITEM    "Eliminar\tDel",         M_CLEAR, GRAYED
             MENUITEM    SEPARATOR
-            MENUITEM    "&Find...\tCtrl+F",     M_FIND
-            MENUITEM    "Find &Next\tF3",       M_FINDNEXT
-            MENUITEM    "&Replace...\tCtrl+H",  M_REPLACE
+            MENUITEM    "Buscar...\tCtrl+F",     M_FIND
+            MENUITEM    "Buscar siguiente\tF3",       M_FINDNEXT
+            MENUITEM    "Reemplazar...\tCtrl+H",  M_REPLACE
 /*
             The hotkey used for replace is CTRL-H in most of the editors, and hence though 
             this key may conflict with backspace key in IMEs, this key is used here to be compatible
             with all the editors. Please contact ChrisW/RajeshM for more details.
 */
-            MENUITEM    "&Go To...\tCtrl+G",    M_GOTO
+            MENUITEM    "Ir a...\tCtrl+G",    M_GOTO
             MENUITEM    SEPARATOR
-            MENUITEM    "Select &All\tCtrl+A",  M_SELECTALL
-            MENUITEM    "Time/&Date\tF5",       M_DATETIME
+            MENUITEM    "Seleccionar todo\tCtrl+A",  M_SELECTALL
+            MENUITEM    "Hora y fecha\tF5",       M_DATETIME
         END
 
-    POPUP   "F&ormat"
+    POPUP   "Formato"
         BEGIN
-            MENUITEM    "&Word Wrap"      M_WW
-            MENUITEM    "&Font...",       M_SETFONT
+            MENUITEM    "Ajuste de línea"      M_WW
+            MENUITEM    "Fuente...",       M_SETFONT
         END
 
-    POPUP   "&View"
+    POPUP   "Ver"
         BEGIN
-            MENUITEM "&Status Bar",             M_STATUSBAR
+            MENUITEM "Barra de estado",             M_STATUSBAR
         END
 
     POPUP "&Help"
         BEGIN
-            MENUITEM     "&View Help",  M_HELP
+            MENUITEM     "Ver la Ayuda",  M_HELP
             MENUITEM     SEPARATOR
-            MENUITEM     "&About Notepad NT",M_ABOUT
+            MENUITEM     "Acerca del Bloc de notas",M_ABOUT
         END
 
 END
@@ -152,6 +152,7 @@ BEGIN
     "C",       M_COPY,     VIRTKEY, CONTROL
     "V",       M_PASTE,    VIRTKEY, CONTROL
     "A",       M_SELECTALL,VIRTKEY, CONTROL
+    "E",       M_SELECTALL,VIRTKEY, CONTROL
 END
 
 /* Allow exit using ^C, ^D or ^Z during Setup */
@@ -185,15 +186,15 @@ BEGIN
     IDS_MERGE1       "%%"
     IDS_DISKERROR   "Cannot open the %% file.\n\nMake sure a disk is in the drive you specified."
     IDS_FNF         "Cannot find the %% file.\n\nDo you want to create a new file?"
-    IDS_SCBC        "The text in the %% file has changed.\n\nDo you want to save the changes?"
-    IDS_UNTITLED    "Untitled"
-    IDS_NOTEPAD     " - Notepad NT"
-    IDS_CFS         "Cannot find ""%%"""
+    IDS_SCBC        "El texto dentro del archivo %% ha cambiado.\n\n¿Quieres guardar los cambios?"
+    IDS_UNTITLED    "Sin título"
+    IDS_NOTEPAD     " - Bloc de notas"
+    IDS_CFS         "No se encontró ""%%"""
     /* The following is a generic out of memory message which can also be
        system modal so no /n can appear in it. */
     IDS_ERRSPACE    "Not enough memory available to complete this operation. Quit one or more applications to increase available memory, and then try again."
     IDS_FTL         "The %% file is too large for Notepad NT.\n\nUse another editor to edit the file."
-    IDS_NN          "Notepad NT"
+    IDS_NN          "Bloc de notas"
     IDS_COMMDLGINIT "Failed to Initialize File Dialogs. Change the Filename and try again."
     IDS_PRINTDLGINIT "Failed to Initialize Print Dialogs. Make sure that your printer is connected properly and use Control Panel to verify that the printer is configured properly."
     IDS_CANTPRINT   "Cannot print the %% file. Be sure that your printer is connected properly and use Control Panel to verify that the printer is configured properly."
@@ -207,10 +208,10 @@ BEGIN
     IDS_ACCESSDENY  "%%\nYou do not have permission to open this file.  See the owner of the file or an administrator to obtain permission."
 
 
-    IDS_ANSITEXT    "Text Documents (*.txt)" /* filter text for File/Open */
-    IDS_ALLFILES    "All Files "   /* filter text for File/Open  */
-    IDS_OPENCAPTION "Open"      /* title for file/open dialog */
-    IDS_SAVECAPTION "Save As"   /* title for file/save dialog */
+    IDS_ANSITEXT    "Documentos de texto (*.txt)" /* filter text for File/Open */
+    IDS_ALLFILES    "Todos los archivos"   /* filter text for File/Open  */
+    IDS_OPENCAPTION "Abrir"      /* title for file/open dialog */
+    IDS_SAVECAPTION "Guardar como"   /* title for file/save dialog */
     IDS_CANNOTQUIT  "You cannot quit Windows because the Save As dialog\nbox in Notepad NT is open.  Switch to Notepad NT, close this\ndialog box, and then try quitting Windows again."
     IDS_LOADDRVFAIL "Cannot access your printer.\nBe sure that your printer is connected properly and use Control Panel to verify that the printer is configured properly."
     IDS_ERRUNICODE  "%%\n This file contains characters in Unicode format which will be lost if you save this file as an ANSI encoded text file. To keep the Unicode information, click Cancel below and then select one of the Unicode options from the Encoding drop down list. Continue?"
@@ -227,7 +228,7 @@ BEGIN
 
     IDS_CURRENT_PAGE "Page %d"  /* don't change %d; used for printf formatting */
 
-    IDS_LINECOL          "   Ln %d, Col %d  "
+    IDS_LINECOL          "   Línea %d, Columna %d  "
     IDS_COMPRESSED_FILE  " Compressed,"
     IDS_ENCRYPTED_FILE   " Encrypted,"
     IDS_HIDDEN_FILE      " Hidden,"
