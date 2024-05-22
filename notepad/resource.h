@@ -507,7 +507,7 @@
 #define SUBLANG_ENGLISH_TRINIDAD        0x0b
 #define SUBLANG_SERBIAN_MONTENEGRO_LATIN 0x0b
 #define SUBLANG_SPANISH_ARGENTINA       0x0b
-#define IDD_ABORTPRINT                  11
+//#define IDD_ABORTPRINT                  11
 #define IDS_PRINTDLGINIT                11
 #define VK_CLEAR                        0x0C
 #define WM_SETTEXT                      0x000C
@@ -539,7 +539,7 @@
 #define LANG_HUNGARIAN                  0x0e
 #define SUBLANG_ARABIC_UAE              0x0e
 #define SUBLANG_SPANISH_URUGUAY         0x0e
-#define IDD_GOTODIALOG                  14
+//#define IDD_GOTODIALOG                  14
 #define IDS_CREATEERR                   14
 #define WM_PAINT                        0x000F
 #define HTBOTTOM                        15

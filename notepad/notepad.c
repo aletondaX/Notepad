@@ -232,7 +232,7 @@ VOID PASCAL SetPageSetupDefaults( VOID )
 {
     TCHAR szIMeasure[ 2 ];
 
-    g_PageSetupDlg.lpfnPageSetupHook= PageSetupHookProc;
+    //g_PageSetupDlg.lpfnPageSetupHook= PageSetupHookProc;
     g_PageSetupDlg.lpPageSetupTemplateName= MAKEINTRESOURCE(IDD_PAGESETUP);
 
     GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_IMEASURE, szIMeasure, 2 );

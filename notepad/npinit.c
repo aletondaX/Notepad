@@ -662,14 +662,14 @@ BOOL ProcessShellOptions (LPTSTR lpszCmdLine, int cmdShow)
 
     /* print the file */
 
-    if (bDefPrinter)
+    /*if (bDefPrinter)
     {
         PrintIt( DoNotUseDialog );
     }
     else
     {
         PrintIt( NoDialogNonDefault );
-    }
+    }*/
 
 
     return (TRUE);

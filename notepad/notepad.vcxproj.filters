@@ -30,9 +30,6 @@
     <ClCompile Include="npmisc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="npprint.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="nputf.c">
       <Filter>Source Files</Filter>
     </ClCompile>

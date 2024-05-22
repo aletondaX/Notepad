@@ -57,10 +57,10 @@ typedef enum _NP_LINETYPE {
 
 // Dialog IDs
 
-#define IDD_ABORTPRINT       11
+//#define IDD_ABORTPRINT       11
 #define IDD_PAGESETUP        12
 #define IDD_SAVEDIALOG       13    // template for save dialog
-#define IDD_GOTODIALOG       14    // goto line number dialog
+//#define IDD_GOTODIALOG       14    // goto line number dialog
 
 // Control IDs 
 

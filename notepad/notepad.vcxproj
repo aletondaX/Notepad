@@ -24,7 +24,6 @@
     <ClCompile Include="npfile.c" />
     <ClCompile Include="npinit.c" />
     <ClCompile Include="npmisc.c" />
-    <ClCompile Include="npprint.c" />
     <ClCompile Include="nputf.c" />
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,3 @@
-/*                                            */
-/*       Notepad NT application               */
-/*                                            */
-/*   Copyright (C) 1984-2001  Microsoft Inc.  */
-/*   Copyright (C) 2024  Alex313031           */
-/*                                            */
-
 #include "notepad.h"
 #include <winver.h>
 #define GRP      WS_GROUP
