@@ -2,7 +2,7 @@
 
 Notepad clásico de Windows con fixes y optimizaciones. La traducción al español es de mi autoría.
 
-Optimizaciones y Fixes por [Alex313031]([https://github.com/vxiiduu/NotepadEx](https://github.com/Alex313031/Notepad-NT)):
+Optimizaciones y Fixes por [Alex313031](https://github.com/Alex313031/Notepad-NT):
 
  - Sets de instrucciones [SSE2](https://en.wikipedia.org/wiki/SSE2) y [SIMD](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data).
  - Opción del compilador [/O2](https://learn.microsoft.com/es-es/cpp/build/reference/o1-o2-minimize-size-maximize-speed) para una optimización máxima.
