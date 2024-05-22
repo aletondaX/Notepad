@@ -17,17 +17,17 @@
 
 #include "notepad.rcv"
 
-#define VER_COMPANYNAME_STR         "Alex313031"
-#define VER_FILEDESCRIPTION_STR     "Notepad for Windows NT"
-#define VER_FILEVERSION             5,2,3792,1
-#define VER_FILEVERSION_STR         "5.2.3792.1"
-#define VER_INTERNALNAME_STR        "Notepad"
-#define VER_LEGALCOPYRIGHT_STR      "Copyright (c) 2024 Alex313031"
-#define VER_ORIGINALFILENAME_STR    "notepad-nt.exe"
-#define VER_PRODUCTNAME_STR         "Notepad NT"
-#define VER_PRODUCTVERSION          5,2,3792,1
-#define VER_PRODUCTVERSION_STR      "5.2.3792.1"
-#define VER_COMMENTS_STR            "https://github.com/Alex313031/Notepad-ng"
+#define VER_COMPANYNAME_STR         "AleTonda"
+#define VER_FILEDESCRIPTION_STR     "Bloc de notas"
+#define VER_FILEVERSION             1,0,0,0
+#define VER_FILEVERSION_STR         "1.0.0.0"
+#define VER_INTERNALNAME_STR        "Bloc de notas"
+#define VER_LEGALCOPYRIGHT_STR      "Copyright (c) 2024 AleTonda"
+#define VER_ORIGINALFILENAME_STR    "notepad.exe"
+#define VER_PRODUCTNAME_STR         "Bloc de notas"
+#define VER_PRODUCTVERSION          1,0,0,0
+#define VER_PRODUCTVERSION_STR      "1.0.0.0"
+#define VER_COMMENTS_STR            "https://github.com/aletondaX/Notepad"
 
 #ifndef DEBUG
 #define VER_DEBUG                   0
@@ -67,7 +67,7 @@ BEGIN
         /* For example, a file might have values "0x409,1252" indicating that it  */
         /* supports English language (0x409) in the Windows ANSI codepage (1252). */
 
-        VALUE "Translation", 0x409, 1252
+        VALUE "Translation", 0x40A, 850
 
     END
 END
@@ -83,9 +83,6 @@ BEGIN
             MENUITEM    "&Guardar\tCtrl+S",                        M_SAVE
             MENUITEM    "Guardar como...\tCtrl+Shift+S",            M_SAVEAS
             MENUITEM    SEPARATOR
-            MENUITEM    "Configurar página...",                       M_PAGESETUP
-            MENUITEM    "Imprimir...\tCtrl+P",                    M_PRINT
-            MENUITEM    SEPARATOR
             MENUITEM    "Salir",                                M_EXIT
         END
 
@@ -98,17 +95,16 @@ BEGIN
             MENUITEM    "Pegar\tCtrl+V",       M_PASTE, GRAYED
             MENUITEM    "Eliminar\tDel",         M_CLEAR, GRAYED
             MENUITEM    SEPARATOR
-            MENUITEM    "Buscar...\tCtrl+F",     M_FIND
+            MENUITEM    "Buscar...\tCtrl+F / Ctrl+B",     M_FIND
             MENUITEM    "Buscar siguiente\tF3",       M_FINDNEXT
-            MENUITEM    "Reemplazar...\tCtrl+H",  M_REPLACE
+            MENUITEM    "Reemplazar...\tCtrl+H / Ctrl+R",  M_REPLACE
 /*
             The hotkey used for replace is CTRL-H in most of the editors, and hence though 
             this key may conflict with backspace key in IMEs, this key is used here to be compatible
             with all the editors. Please contact ChrisW/RajeshM for more details.
 */
-            MENUITEM    "Ir a...\tCtrl+G",    M_GOTO
             MENUITEM    SEPARATOR
-            MENUITEM    "Seleccionar todo\tCtrl+A",  M_SELECTALL
+            MENUITEM    "Seleccionar todo\tCtrl+A / Ctrl+E",  M_SELECTALL
             MENUITEM    "Hora y fecha\tF5",       M_DATETIME
         END
 
@@ -123,13 +119,6 @@ BEGIN
             MENUITEM "Barra de estado",             M_STATUSBAR
         END
 
-    POPUP "&Help"
-        BEGIN
-            MENUITEM     "Ver la Ayuda",  M_HELP
-            MENUITEM     SEPARATOR
-            MENUITEM     "Acerca del Bloc de notas",M_ABOUT
-        END
-
 END
 
 MainAcc ACCELERATORS PRELOAD DISCARDABLE
@@ -138,14 +127,12 @@ BEGIN
     "O",       M_OPEN,     VIRTKEY, CONTROL
     "S",       M_SAVE,     VIRTKEY, CONTROL
     "S",       M_SAVEAS,   VIRTKEY, CONTROL, SHIFT
-    "P",       M_PRINT,    VIRTKEY, CONTROL
-    VK_INSERT, M_COPY,     VIRTKEY, CONTROL
-    VK_F1,     M_HELP,     VIRTKEY
     VK_F3,     M_FINDNEXT, VIRTKEY
     VK_F5,     M_DATETIME, VIRTKEY
-    "G",       M_GOTO,     VIRTKEY, CONTROL
     "F",       M_FIND    , VIRTKEY, CONTROL, NOINVERT
+    "B",       M_FIND    , VIRTKEY, CONTROL, NOINVERT
     "H",       M_REPLACE,  VIRTKEY, CONTROL, NOINVERT
+    "R",       M_REPLACE,  VIRTKEY, CONTROL, NOINVERT
     VK_BACK,   M_UNDO,     VIRTKEY, ALT
     "Z",       M_UNDO,     VIRTKEY, CONTROL
     "X",       M_CUT,      VIRTKEY, CONTROL
@@ -153,6 +140,7 @@ BEGIN
     "V",       M_PASTE,    VIRTKEY, CONTROL
     "A",       M_SELECTALL,VIRTKEY, CONTROL
     "E",       M_SELECTALL,VIRTKEY, CONTROL
+    "Z",       M_WW,       VIRTKEY, ALT
 END
 
 /* Allow exit using ^C, ^D or ^Z during Setup */
@@ -161,12 +149,8 @@ BEGIN
     "N",       M_NEW,      VIRTKEY, CONTROL
     "O",       M_OPEN,     VIRTKEY, CONTROL
     "S",       M_SAVE,     VIRTKEY, CONTROL
-    "P",       M_PRINT,    VIRTKEY, CONTROL
-    VK_INSERT, M_COPY,     VIRTKEY, CONTROL
-    VK_F1,     M_HELP,     VIRTKEY
     VK_F3,     M_FINDNEXT, VIRTKEY
     VK_F5,     M_DATETIME, VIRTKEY
-    "G",       M_GOTO,     VIRTKEY, CONTROL
     "F",       M_FIND,     VIRTKEY, CONTROL, NOINVERT
     "H",       M_REPLACE,  VIRTKEY, CONTROL, NOINVERT
     VK_BACK,   M_UNDO,     VIRTKEY, ALT

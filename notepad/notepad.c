@@ -29,7 +29,7 @@ TCHAR    szSearch[CCHKEYMAX];           /* Search string                     */
 TCHAR    szReplace[CCHKEYMAX];          /* replace string                    */
 
 BOOL     fUntitled = TRUE;              /* TRUE iff notepad has no title                  */
-BOOL     fStatus = FALSE;               /* status bar shown?                              */
+BOOL     fStatus = TRUE;                /* status bar shown?                              */
 BOOL     fLastStatus = FALSE;           /* status bar status when wordwrap was turned off */
 INT      dyStatus;                      /* height of status bar                           */
 
@@ -765,45 +765,6 @@ INT NPCommand(
             }
             break;
 
-        case M_GOTO:
-            {
-                INT  Result;
-
-                Result= (INT)DialogBox( hInstanceNP,
-                                        MAKEINTRESOURCE(IDD_GOTODIALOG),
-                                        hwndNP,
-                                        GotoDlgProc );
-
-                //
-                // move cursor only if ok pressed and line number ok
-                //
-
-                if( Result == 0 )
-                {
-                    GotoAndScrollInView( lGotoLine );
-                }
-            }
-            break;
-
-        case M_ABOUT:
-            ShellAbout(hwndNP,
-                       szNN,
-                       TEXT(""),
-                       LoadIcon(hInstanceNP,
-                                (LPTSTR)MAKEINTRESOURCE(ID_ICON)));
-
-            break;
-
-        case M_HELP:
-            {
-                // NT5 style - on XP and 2k, the required CHM file is located at %WINDIR%\Help\notepad.chm
-                //HtmlHelpA(GetDesktopWindow(), "notepad.chm", HH_DISPLAY_TOPIC, 0L);
-                TCHAR szNpHelpPath[MAX_PATH];
-                ExpandEnvironmentStrings(TEXT("notepad-nt.chm"), szNpHelpPath, ARRAYSIZE(szNpHelpPath));
-                ShellExecute(GetDesktopWindow(), NULL, szNpHelpPath, NULL, NULL, TRUE);
-            }
-            break;
-
         case M_CUT:
         case M_COPY:
         case M_CLEAR:
@@ -909,39 +870,6 @@ INT NPCommand(
             break;
 
         case ID_EDIT:
-            break;
-
-        case M_PRINT:
-            PrintIt( UseDialog );
-            break;
-
-        case M_PAGESETUP:
-            TryPrintDlgAgain:
-            
-            if( PageSetupDlg(&g_PageSetupDlg) )
-            {
-                //  We know it's okay to copy these strings over...
-                lstrcpy(chPageText[HEADER], chPageTextTemp[HEADER]);
-                lstrcpy(chPageText[FOOTER], chPageTextTemp[FOOTER]);
-            }
-            else
-            {
-                rc= CommDlgExtendedError();
-
-                if( rc == PDERR_PRINTERNOTFOUND ||
-                    rc == PDERR_DNDMMISMATCH    ||
-                    rc == PDERR_DEFAULTDIFFERENT )
-                  {
-                      FreeGlobal();
-                      g_PageSetupDlg.hDevMode= g_PageSetupDlg.hDevNames= 0;
-                      goto TryPrintDlgAgain;
-                  }
-
-                // Check for Dialog Failure
-
-                SignalCommDlgError( );
-
-            }
             break;
 
         case M_SETFONT:
@@ -1793,7 +1721,7 @@ VOID NpResetMenu( HWND hwnd )
 
     // enable 'goto' iff wordwrap is off;  MLE doesn't give good results if word wrap on
 
-    EnableMenuItem(GetSubMenu(hMenu, 1), M_GOTO, fWrap ? MF_GRAYED : MF_ENABLED );
+    //EnableMenuItem(GetSubMenu(hMenu, 1), M_GOTO, fWrap ? MF_GRAYED : MF_ENABLED );
 
     // enable Undo only if editcontrol says we can do it.
 

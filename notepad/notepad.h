@@ -75,8 +75,6 @@ typedef enum _NP_LINETYPE {
 #define M_OPEN               2
 #define M_SAVE               3
 #define M_SAVEAS             4
-#define M_PAGESETUP          5
-#define M_PRINT              6
 #define M_EXIT               7
 
 // Edit
@@ -88,7 +86,6 @@ typedef enum _NP_LINETYPE {
 #define M_FIND               21
 #define M_FINDNEXT           22
 #define M_REPLACE            23
-#define M_GOTO               24
 #define M_SELECTALL          25
 #define M_DATETIME           26
 #define M_STATUSBAR          27
@@ -96,10 +93,6 @@ typedef enum _NP_LINETYPE {
 // Format
 #define M_WW                 32
 #define M_SETFONT            33
-
-// Help
-#define M_HELP               64
-#define M_ABOUT              65
 
 // Control IDs
 

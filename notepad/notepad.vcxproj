@@ -46,6 +46,7 @@
     <ProjectGuid>{97A1C6B6-3AFB-4847-8DAF-7CDE257070A2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Notepad-NT</RootNamespace>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
