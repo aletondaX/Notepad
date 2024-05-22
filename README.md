@@ -1,44 +1,20 @@
-# <img src="https://github.com/Alex313031/Notepad-NT/blob/main/winnt_flag.svg" width="48">&nbsp; Notepad-NT &nbsp;<img src="https://github.com/Alex313031/Notepad-NT/blob/main/notepad/notepad.ico" width="42">
+# <img src="https://github.com/Alex313031/Notepad-NT/blob/main/winnt_flag.svg" width="48">&nbsp; Notepad &nbsp;<img src="https://github.com/Alex313031/Notepad-NT/blob/main/notepad/notepad.ico" width="42">
 
-Windows NT 5.x Notepad with fixes
+Notepad clásico de Windows con fixes y optimizaciones. La traducción al español es de mi autoría.
 
-Modified from the Windows NT 5.2 source, with additions from [NotePadEx](https://github.com/vxiiduu/NotepadEx), and compiler optimizations.
+Optimizaciones y Fixes por [Alex313031]([https://github.com/vxiiduu/NotepadEx](https://github.com/Alex313031/Notepad-NT)):
 
- - Use [SSE2](https://en.wikipedia.org/wiki/SSE2) [SIMD](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data)
-   instruction set extensions for both x86 and x64.
- - Use the [/O2 compiler flag](https://learn.microsoft.com/en-us/cpp/build/reference/o1-o2-minimize-size-maximize-speed)
-   for maximum optimizations.
- - Change icon to classic NT one.
- - Lint source and remove undefined variables.
- - Fix building on MSVS 2017/2019.
- - Add 'Ctrl+Shift+S' to open the "Save As" Dialog box.
- - Enable "Word Wrap" and "Status Bar" to be enabled at the same time.
- - Reduce flickering when resizing the Window on NT 6.0 and below.
- - Name is changed to "Notepad NT" for most things.
+ - Sets de instrucciones [SSE2](https://en.wikipedia.org/wiki/SSE2) y [SIMD](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data).
+ - Opción del compilador [/O2](https://learn.microsoft.com/es-es/cpp/build/reference/o1-o2-minimize-size-maximize-speed) para una optimización máxima.
+ - Se cambió el ícono por el clásico de Windows NT.
+ - Se removieron variables indefinidas del código fuente.
+ - Se puede hacer la build con MSVS 2017/2019.
+ - Agregado 'Ctrl+Shift+S' para abrir la ventana de "Guardar como".
+ - Ahora es posible activar "Ajuste de línea" y "Barra de estado" al mismo tiempo.
 
-Works on Windows XP - 10 (11 doesn't display it correctly)
+Funciona desde Windows XP hasta Windows 10 (en Win11 no se muestra correctamente)
 
-### TODO:
+### Compilar
 
- &ndash; Add "Open New Window" option.
-
- &ndash; Allow "Find" Dialog box to search backwards with 'Shift+F3'
-
-### Building
-
-Requires MSVS 2017 or 2019 *and* the `v141_xp` Windows XP toolchain.  
-This can be found in the Visual Studio Installer after going to "Individual Components" and searching for "Windows XP". 
-Info [Here](https://learn.microsoft.com/en-us/cpp/build/configuring-programs-for-windows-xp#install-the-windows-xp-platform-toolset).
-
-The original source called for MSVS 2005, and the updated project files from [vxiiduu](https://github.com/vxiiduu) 
-called for MSVS 2010, but I wanted it to be able to build on modern Windows and modern MSVS, 
-while still being able to build on Windows 7.
-
- - Open the `Notepad-NT.sln` file and then you can build it.
-
-#### Windows 2000 Support
-
-Requires MSVS 2010 + Windows 7 SDK  
-This allows for Windows 2000 support.
-
- - Open the `Notepad-NT-msvs2010.sln` file and then you can build it.
+Requiere MSVS 2017 o 2019 *Y* el conjunto de herramientas de Windows XP `v141_xp`.
+Esta se puede encontrar en el instalador del Visual Studio yendo a "Componentes Individuales" y buscando "Windows XP". Info [aquí](https://learn.microsoft.com/es-es/cpp/build/configuring-programs-for-windows-xp#install-the-windows-xp-platform-toolset).
