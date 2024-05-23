@@ -29,7 +29,7 @@ TCHAR    szSearch[CCHKEYMAX];           /* Search string                     */
 TCHAR    szReplace[CCHKEYMAX];          /* replace string                    */
 
 BOOL     fUntitled = TRUE;              /* TRUE iff notepad has no title                  */
-BOOL     fStatus = TRUE;                /* status bar shown?                              */
+BOOL     fStatus = FALSE;                /* status bar shown?                              */
 BOOL     fLastStatus = FALSE;           /* status bar status when wordwrap was turned off */
 INT      dyStatus;                      /* height of status bar                           */
 
@@ -39,7 +39,7 @@ HMENU    hSysMenuSetup;                 /* Save Away for disabled Minimize   */
 DWORD    dwEmSetHandle = 0;             /* Is EM_SETHANDLE in process?       */
 HANDLE   hAccel;                        /* Handle to accelerator table       */
 BOOL     fRunBySetup = FALSE;           /* Did SlipUp WinExec us??           */
-BOOL     fWrap = 0;                     /* Flag for word wrap                */
+BOOL     fWrap = 1;                     /* Flag for word wrap                */
 TCHAR    szNotepad[] = TEXT("Notepad"); /* Name of notepad window class    */
 
 BOOL     fInSaveAsDlg = FALSE;
@@ -817,35 +817,35 @@ INT NPCommand(
             // disable the status bar
             // Line numbers when wordwrap is on are very confusing for now.  Just turn them
             // off until we better understand what the user wants to see.
-            if (fWrap)
-            {
-                HMENU hMenu;
+            //if (fWrap)
+            //{
+            //    HMENU hMenu;
 
-                // Uncheck the StatusBar and remove it.
-                fLastStatus= fStatus;      // remember for when wordwrap  gets turned off
-                if( fStatus ) 
-                {
-                    SendMessage(hwnd, WM_COMMAND, M_STATUSBAR, 0L);
-                }
+            //    // Uncheck the StatusBar and remove it.
+            //    fLastStatus= fStatus;      // remember for when wordwrap  gets turned off
+            //    if( fStatus ) 
+            //    {
+            //        SendMessage(hwnd, WM_COMMAND, M_STATUSBAR, 0L);
+            //    }
 
-                hMenu = GetMenu(hwndNP);
-                CheckMenuItem (GetSubMenu(hMenu, 3), M_STATUSBAR, MF_UNCHECKED);
-                EnableMenuItem(GetSubMenu(hMenu, 3), M_STATUSBAR, MF_GRAYED);
-            }
-            // enable the status bar
-            else
-            {
-                HMENU hMenu;
+            //    hMenu = GetMenu(hwndNP);
+            //    CheckMenuItem (GetSubMenu(hMenu, 3), M_STATUSBAR, MF_UNCHECKED);
+            //    EnableMenuItem(GetSubMenu(hMenu, 3), M_STATUSBAR, MF_GRAYED);
+            //}
+            //// enable the status bar
+            //else
+            //{
+            //    HMENU hMenu;
 
-                hMenu = GetMenu(hwndNP);
-                EnableMenuItem(GetSubMenu(hMenu, 3), M_STATUSBAR, MF_ENABLED);
+            //    hMenu = GetMenu(hwndNP);
+            //    EnableMenuItem(GetSubMenu(hMenu, 3), M_STATUSBAR, MF_ENABLED);
 
-                // change the statusbar status to what it was before wordwrap was turned on
-                if( fLastStatus ) 
-                {
-                   SendMessage( hwnd, WM_COMMAND, M_STATUSBAR, 0L);
-                }
-            }
+            //    // change the statusbar status to what it was before wordwrap was turned on
+            //    if( fLastStatus ) 
+            //    {
+            //       SendMessage( hwnd, WM_COMMAND, M_STATUSBAR, 0L);
+            //    }
+            //}
 
             break;
 
@@ -872,66 +872,66 @@ INT NPCommand(
         case ID_EDIT:
             break;
 
-        case M_SETFONT:
-        {
-            CHOOSEFONT  cf;
-            HFONT       hFontNew;
-            HDC         hDisplayDC;     // display DC
+        //case M_SETFONT:
+        //{
+        //    CHOOSEFONT  cf;
+        //    HFONT       hFontNew;
+        //    HDC         hDisplayDC;     // display DC
 
-            hDisplayDC= GetDC(NULL);    // try to get display DC
-            if( !hDisplayDC )
-                break;
+        //    hDisplayDC= GetDC(NULL);    // try to get display DC
+        //    if( !hDisplayDC )
+        //        break;
 
-            // calls the font chooser (in commdlg)
-            // We set lfHeight; choosefont returns ipointsize
-            //
+        //    // calls the font chooser (in commdlg)
+        //    // We set lfHeight; choosefont returns ipointsize
+        //    //
 
-            cf.lStructSize = sizeof(CHOOSEFONT);
-            cf.hwndOwner = hwnd;
-            cf.lpLogFont = &FontStruct;         // filled in by init
-            FontStruct.lfHeight= -MulDiv(iPointSize,GetDeviceCaps(hDisplayDC,LOGPIXELSY),720);
+        //    cf.lStructSize = sizeof(CHOOSEFONT);
+        //    cf.hwndOwner = hwnd;
+        //    cf.lpLogFont = &FontStruct;         // filled in by init
+        //    FontStruct.lfHeight= -MulDiv(iPointSize,GetDeviceCaps(hDisplayDC,LOGPIXELSY),720);
  
-            // We filter out useless stuff here
-            // We tried CF_NOSCRIPTSEL, but the FE had fits.
-            //    Even though it looks useless, it changes the font that gets mapped on FE builds.
-            //    Even though we ignore the lfCharSet that gets returned, we have the "right"
-            //    font according to the FE guys.  It might make sense to use lfCharSet to
-            //    convert the ansi file when it is converted to Unicode, but this might be
-            //    confusing.
+        //    // We filter out useless stuff here
+        //    // We tried CF_NOSCRIPTSEL, but the FE had fits.
+        //    //    Even though it looks useless, it changes the font that gets mapped on FE builds.
+        //    //    Even though we ignore the lfCharSet that gets returned, we have the "right"
+        //    //    font according to the FE guys.  It might make sense to use lfCharSet to
+        //    //    convert the ansi file when it is converted to Unicode, but this might be
+        //    //    confusing.
  
-            cf.Flags = CF_INITTOLOGFONTSTRUCT |
-                       CF_SCREENFONTS         | 
-                       CF_NOVERTFONTS         |
-                       // CF_NOSCRIPTSEL         |  // windows bug# 7770 (April 10,2001)
-                       0;
-            cf.rgbColors = 0;                   // only if cf_effects
-            cf.lCustData = 0;                   // for hook function
-            cf.lpfnHook = (LPCFHOOKPROC) NULL;
-            cf.lpTemplateName = (LPTSTR) NULL;
-            cf.hInstance = NULL;
-            cf.lpszStyle = NULL;                // iff cf_usestyle
-            cf.nFontType = SCREEN_FONTTYPE;
-            cf.nSizeMin  = 0;  // iff cf_limitsize
-            cf.nSizeMax  = 0;  // iff cf_limitsize
-            ReleaseDC( NULL, hDisplayDC );
+        //    cf.Flags = CF_INITTOLOGFONTSTRUCT |
+        //               CF_SCREENFONTS         | 
+        //               CF_NOVERTFONTS         |
+        //               // CF_NOSCRIPTSEL         |  // windows bug# 7770 (April 10,2001)
+        //               0;
+        //    cf.rgbColors = 0;                   // only if cf_effects
+        //    cf.lCustData = 0;                   // for hook function
+        //    cf.lpfnHook = (LPCFHOOKPROC) NULL;
+        //    cf.lpTemplateName = (LPTSTR) NULL;
+        //    cf.hInstance = NULL;
+        //    cf.lpszStyle = NULL;                // iff cf_usestyle
+        //    cf.nFontType = SCREEN_FONTTYPE;
+        //    cf.nSizeMin  = 0;  // iff cf_limitsize
+        //    cf.nSizeMax  = 0;  // iff cf_limitsize
+        //    ReleaseDC( NULL, hDisplayDC );
 
-            if( ChooseFont(&cf) )
-            {
-                SetCursor( hWaitCursor );        // may take some time
-                
-                hFontNew= CreateFontIndirect(&FontStruct);
-                if( hFontNew )
-                {
-                   DeleteObject( hFont );
-                   hFont= hFontNew;
-                   SendMessage( hwndEdit, WM_SETFONT,
-                               (WPARAM)hFont, MAKELPARAM(TRUE, 0));
-                   iPointSize= cf.iPointSize;  // remember for printer
-                }
-                SetCursor( hStdCursor );
-            }
-            break;
-        }
+        //    if( ChooseFont(&cf) )
+        //    {
+        //        SetCursor( hWaitCursor );        // may take some time
+        //        
+        //        hFontNew= CreateFontIndirect(&FontStruct);
+        //        if( hFontNew )
+        //        {
+        //           DeleteObject( hFont );
+        //           hFont= hFontNew;
+        //           SendMessage( hwndEdit, WM_SETFONT,
+        //                       (WPARAM)hFont, MAKELPARAM(TRUE, 0));
+        //           iPointSize= cf.iPointSize;  // remember for printer
+        //        }
+        //        SetCursor( hStdCursor );
+        //    }
+        //    break;
+        //}
 
         default:
             return FALSE;

@@ -48,9 +48,10 @@ VOID FAR InsertDateTime (BOOL fCrlf)
        lstrcat(szDateTime, TEXT("\r\n"));
 
 
-   lstrcat(szDateTime, szTime);
-   lstrcat(szDateTime, TEXT(" "));
    lstrcat(szDateTime, szDate);
+   lstrcat(szDateTime, TEXT(" "));
+   lstrcat(szDateTime, szTime);
+   lstrcat(szDateTime, TEXT(" - "));
 
    if( fCrlf )
         lstrcat(szDateTime, TEXT("\r\n"));

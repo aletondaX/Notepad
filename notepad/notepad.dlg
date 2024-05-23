@@ -49,5 +49,3 @@ BEGIN
     CONTROL         "",1081,"Static",SS_GRAYRECT,334,50,4,80
     CONTROL         "",1082,"Static",SS_GRAYRECT,262,122,80,4
 END
-
-

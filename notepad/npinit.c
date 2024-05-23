@@ -227,9 +227,9 @@ VOID GetGlobals( VOID )
     // the exact width as lucida console, or the console/csrss will AV (July 9, 1999)
     //
 
-    RegGetString( hKey, TEXT("lfFaceName"), TEXT("Lucida Console"), FontStruct.lfFaceName, LF_FACESIZE);
+    RegGetString( hKey, TEXT("lfFaceName"), TEXT("Consolas"), FontStruct.lfFaceName, LF_FACESIZE);
 
-    iPointSize= RegGetInt( hKey, TEXT("iPointSize"), 100);
+    iPointSize= RegGetInt( hKey, TEXT("iPointSize"), 110);
     fWrap=      RegGetInt( hKey, TEXT("fWrap"),      0);
     fStatus=    RegGetInt( hKey, TEXT("StatusBar"),  0);
     fSaveWindowPositions= RegGetInt( hKey, TEXT("fSaveWindowPositions"), 0 );
