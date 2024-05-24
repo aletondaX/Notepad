@@ -38,9 +38,6 @@
     <None Include="notepad.def">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="notepad.dlg">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="notepad.ico">
       <Filter>Source Files</Filter>
     </None>

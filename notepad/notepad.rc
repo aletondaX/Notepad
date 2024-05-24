@@ -94,11 +94,6 @@ MENUITEM    SEPARATOR
 MENUITEM    "Buscar...\tCtrl+F / Ctrl+B", M_FIND
 MENUITEM    "Buscar siguiente\tF3", M_FINDNEXT
 MENUITEM    "Reemplazar...\tCtrl+H / Ctrl+R", M_REPLACE
-/*
-			The hotkey used for replace is CTRL-H in most of the editors, and hence though
-			this key may conflict with backspace key in IMEs, this key is used here to be compatible
-			with all the editors. Please contact ChrisW/RajeshM for more details.
-*/
 //MENUITEM    "&Go To...\tCtrl+G",    M_GOTO
 MENUITEM    SEPARATOR
 MENUITEM    "Seleccionar todo\tCtrl+A / Ctrl+E", M_SELECTALL
@@ -244,4 +239,4 @@ IDS_CFS         "No se encontró ""%%"""
 	END
 
 	/* Include other dialogs. */
-	rcinclude notepad.dlg
+	//rcinclude notepad.dlg

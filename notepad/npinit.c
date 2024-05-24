@@ -134,19 +134,19 @@ VOID SaveGlobals(VOID)
     RegWriteInt( hKey, TEXT("lfClipPrecision"),  FontStruct.lfClipPrecision);
     RegWriteInt( hKey, TEXT("lfQuality"),        FontStruct.lfQuality);
     RegWriteInt( hKey, TEXT("lfPitchAndFamily"), FontStruct.lfPitchAndFamily);
-    RegWriteInt( hKey, TEXT("iPointSize"),       iPointSize);
+    RegWriteInt( hKey, TEXT("iPointSize"),       iPointSize); // 110?
     RegWriteInt( hKey, TEXT("fWrap"),            fWrap);
     RegWriteInt( hKey, TEXT("StatusBar"),        fStatus);
     RegWriteInt( hKey, TEXT("fSaveWindowPositions"),fSaveWindowPositions );
 
-    RegWriteString( hKey, TEXT("lfFaceName"), FontStruct.lfFaceName);
+    RegWriteString( hKey, TEXT("lfFaceName"), FontStruct.lfFaceName); // Consolas?
 
     RegWriteString( hKey, TEXT("szHeader"),  chPageText[HEADER] );
     RegWriteString( hKey, TEXT("szTrailer"), chPageText[FOOTER] );
-    RegWriteInt( hKey, TEXT("iMarginTop"),    g_PageSetupDlg.rtMargin.top );
+    /*RegWriteInt( hKey, TEXT("iMarginTop"),    g_PageSetupDlg.rtMargin.top );
     RegWriteInt( hKey, TEXT("iMarginBottom"), g_PageSetupDlg.rtMargin.bottom );
     RegWriteInt( hKey, TEXT("iMarginLeft"),   g_PageSetupDlg.rtMargin.left );
-    RegWriteInt( hKey, TEXT("iMarginRight"),  g_PageSetupDlg.rtMargin.right );
+    RegWriteInt( hKey, TEXT("iMarginRight"),  g_PageSetupDlg.rtMargin.right );*/
 
     RegWriteInt( hKey, TEXT("fMLE_is_broken"), fMLE_is_broken );
 
@@ -239,10 +239,10 @@ VOID GetGlobals( VOID )
     RegGetString( hKey, TEXT("szHeader"),  chPageText[HEADER], chPageText[HEADER], PT_LEN );
     RegGetString( hKey, TEXT("szTrailer"), chPageText[FOOTER], chPageText[FOOTER], PT_LEN );
 
-    g_PageSetupDlg.rtMargin.top=    (LONG)RegGetInt( hKey, TEXT("iMarginTop"),    g_PageSetupDlg.rtMargin.top );
-    g_PageSetupDlg.rtMargin.bottom= (LONG)RegGetInt( hKey, TEXT("iMarginBottom"), g_PageSetupDlg.rtMargin.bottom );
-    g_PageSetupDlg.rtMargin.left=   (LONG)RegGetInt( hKey, TEXT("iMarginLeft"),   g_PageSetupDlg.rtMargin.left );
-    g_PageSetupDlg.rtMargin.right=  (LONG)RegGetInt( hKey, TEXT("iMarginRight"),  g_PageSetupDlg.rtMargin.right );
+    //g_PageSetupDlg.rtMargin.top=    (LONG)RegGetInt( hKey, TEXT("iMarginTop"),    g_PageSetupDlg.rtMargin.top );
+    //g_PageSetupDlg.rtMargin.bottom= (LONG)RegGetInt( hKey, TEXT("iMarginBottom"), g_PageSetupDlg.rtMargin.bottom );
+    //g_PageSetupDlg.rtMargin.left=   (LONG)RegGetInt( hKey, TEXT("iMarginLeft"),   g_PageSetupDlg.rtMargin.left );
+    //g_PageSetupDlg.rtMargin.right=  (LONG)RegGetInt( hKey, TEXT("iMarginRight"),  g_PageSetupDlg.rtMargin.right );
 
     // if window positions in registry use them, otherwise us defaults
 
@@ -781,11 +781,11 @@ INT FAR NPInit (HANDLE hInstance, HANDLE hPrevInstance,
 
     /* init. fields of PRINTDLG struct.. */
     /* Inserted here since command line print statements are valid. */
-    g_PageSetupDlg.lStructSize   = sizeof(PAGESETUPDLG);
+  /*  g_PageSetupDlg.lStructSize   = sizeof(PAGESETUPDLG);
     g_PageSetupDlg.hDevMode      = NULL;
     g_PageSetupDlg.hDevNames     = NULL;
     g_PageSetupDlg.hInstance     = hInstance;
-    SetPageSetupDefaults();
+    SetPageSetupDefaults();*/
 
     //
     // Pick up information saved in registry
@@ -806,7 +806,7 @@ INT FAR NPInit (HANDLE hInstance, HANDLE hPrevInstance,
                          hInstance,    // application instance
                          NULL);        // window creation data
 
-    g_PageSetupDlg.hwndOwner     = hwndNP;
+    //g_PageSetupDlg.hwndOwner     = hwndNP;
 
     if( !hwndNP )
         return FALSE;
