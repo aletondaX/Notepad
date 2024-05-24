@@ -1,9 +1,3 @@
-/*
- *   Notepad application
- *   Copyright (C) 1984-2001 Microsoft Inc.
- *   Copyright (C) 2024 Alex313031.
- */
-
 #include "precomp.h"
 // #include <HtmlHelp.h>
 
@@ -59,7 +53,7 @@ NP_FILETYPE g_ftOpenedAs=FT_UNKNOWN;  /* current file was opened           */
 NP_FILETYPE g_ftSaveAs;               /* current file was opened           */
 
 FINDREPLACE FR;                       /* Passed to FindText()              */
-PAGESETUPDLG g_PageSetupDlg;
+//PAGESETUPDLG g_PageSetupDlg;
 UINT wFRMsg;                          /* message used in communicating     */
                                       /* with Find/Replace dialog          */
 
@@ -212,51 +206,51 @@ VOID ReplaceSel( BOOL bView );
 
 /* FreeGlobal, frees  all global memory allocated. */
 
-void NEAR PASCAL FreeGlobal()
-{
-    if(g_PageSetupDlg.hDevMode)
-    {
-        GlobalFree(g_PageSetupDlg.hDevMode);
-    }
-
-    if(g_PageSetupDlg.hDevNames)
-    {
-        GlobalFree(g_PageSetupDlg.hDevNames);
-    }
-
-    g_PageSetupDlg.hDevMode=  NULL; // make sure they are zero for PrintDlg
-    g_PageSetupDlg.hDevNames= NULL;
-}
+//void NEAR PASCAL FreeGlobal()
+//{
+//    if(g_PageSetupDlg.hDevMode)
+//    {
+//        GlobalFree(g_PageSetupDlg.hDevMode);
+//    }
+//
+//    if(g_PageSetupDlg.hDevNames)
+//    {
+//        GlobalFree(g_PageSetupDlg.hDevNames);
+//    }
+//
+//    g_PageSetupDlg.hDevMode=  NULL; // make sure they are zero for PrintDlg
+//    g_PageSetupDlg.hDevNames= NULL;
+//}
 
 VOID PASCAL SetPageSetupDefaults( VOID )
 {
     TCHAR szIMeasure[ 2 ];
 
     //g_PageSetupDlg.lpfnPageSetupHook= PageSetupHookProc;
-    g_PageSetupDlg.lpPageSetupTemplateName= MAKEINTRESOURCE(IDD_PAGESETUP);
+    //g_PageSetupDlg.lpPageSetupTemplateName= MAKEINTRESOURCE(IDD_PAGESETUP);
 
     GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_IMEASURE, szIMeasure, 2 );
 
-    g_PageSetupDlg.Flags= PSD_MARGINS  |
-            PSD_ENABLEPAGESETUPHOOK | PSD_ENABLEPAGESETUPTEMPLATE;
+    /*g_PageSetupDlg.Flags= PSD_MARGINS  |
+            PSD_ENABLEPAGESETUPHOOK | PSD_ENABLEPAGESETUPTEMPLATE;*/
 
     if (szIMeasure[ 0 ] == TEXT( '1' ))
     {
         //  English measure (in thousandths of inches).
-        g_PageSetupDlg.Flags |= PSD_INTHOUSANDTHSOFINCHES;
+        /*g_PageSetupDlg.Flags |= PSD_INTHOUSANDTHSOFINCHES;
         g_PageSetupDlg.rtMargin.top    = 1000;
         g_PageSetupDlg.rtMargin.bottom = 1000;
         g_PageSetupDlg.rtMargin.left   = 750;
-        g_PageSetupDlg.rtMargin.right  = 750;
+        g_PageSetupDlg.rtMargin.right  = 750;*/
     }
     else
     {
         //  Metric measure (in hundreths of millimeters).
-        g_PageSetupDlg.Flags |= PSD_INHUNDREDTHSOFMILLIMETERS;
+        /*g_PageSetupDlg.Flags |= PSD_INHUNDREDTHSOFMILLIMETERS;
         g_PageSetupDlg.rtMargin.top    = 2500;
         g_PageSetupDlg.rtMargin.bottom = 2500;
         g_PageSetupDlg.rtMargin.left   = 2000;
-        g_PageSetupDlg.rtMargin.right  = 2000;
+        g_PageSetupDlg.rtMargin.right  = 2000;*/
     }
 
 }
@@ -1376,7 +1370,7 @@ INT WINAPI WinMain(
 
     /* Clean up any global allocations */
 
-    FreeGlobal();
+    /*FreeGlobal();*/
 
     LocalFree( hEdit );
 

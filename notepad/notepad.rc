@@ -239,4 +239,4 @@ IDS_CFS         "No se encontró ""%%"""
 	END
 
 	/* Include other dialogs. */
-	//rcinclude notepad.dlg
+	rcinclude notepad.dlg

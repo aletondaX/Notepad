@@ -58,7 +58,7 @@ typedef enum _NP_LINETYPE {
 // Dialog IDs
 
 //#define IDD_ABORTPRINT       11
-#define IDD_PAGESETUP        12
+//#define IDD_PAGESETUP        12
 #define IDD_SAVEDIALOG       13    // template for save dialog
 //#define IDD_GOTODIALOG       14    // goto line number dialog
 
@@ -285,7 +285,7 @@ extern TCHAR  szSaveFilterSpec[]; /* default save filter spec          */
 extern TCHAR *szAnsiText;       /* part of the text for the above    */
 extern TCHAR *szAllFiles;       /* part of the text for the above    */
 extern FINDREPLACE FR;          /* Passed to FindText()        */
-extern PAGESETUPDLG g_PageSetupDlg;
+//extern PAGESETUPDLG g_PageSetupDlg;
 extern TCHAR  szPrinterName []; /* name of the printer passed to PrintTo */
 
 extern NP_FILETYPE    g_ftOpenedAs;     /* file was opened           */
