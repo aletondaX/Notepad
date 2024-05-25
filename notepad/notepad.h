@@ -88,7 +88,7 @@ typedef enum _NP_LINETYPE {
 #define M_REPLACE            23
 #define M_SELECTALL          25
 #define M_DATETIME           26
-#define M_STATUSBAR          27
+//#define M_STATUSBAR          27
 
 // Format
 #define M_WW                 32
@@ -261,7 +261,7 @@ extern TCHAR   *szNEDSTP;
 extern TCHAR   *szNEMTP;
 extern TCHAR   *szCFS;
 extern TCHAR   *szPE;
-extern TCHAR   *szCP;
+//extern TCHAR   *szCP;
 extern TCHAR   *szACCESSDENY;
 extern TCHAR   *szFontTooBig;
 extern TCHAR   *szLoadDrvFail;
@@ -286,17 +286,16 @@ extern TCHAR *szAnsiText;       /* part of the text for the above    */
 extern TCHAR *szAllFiles;       /* part of the text for the above    */
 extern FINDREPLACE FR;          /* Passed to FindText()        */
 //extern PAGESETUPDLG g_PageSetupDlg;
-extern TCHAR  szPrinterName []; /* name of the printer passed to PrintTo */
+//extern TCHAR  szPrinterName []; /* name of the printer passed to PrintTo */
 
 extern NP_FILETYPE    g_ftOpenedAs;     /* file was opened           */
 extern NP_FILETYPE    g_ftSaveAs;       /* file was saved as type    */
 
 extern UINT   wFRMsg;           /* message used in communicating    */
                                 /*   with Find/Replace dialog       */
-extern UINT   wHlpMsg;          /* message used in invoking help    */
 
 extern HMENU hSysMenuSetup;     /* Save Away for disabled Minimize   */
-extern BOOL  fStatus;
+//extern BOOL  fStatus;   // COMENTAR AL ÚLTIMO
 extern INT   dyStatus;
 
 
@@ -309,11 +308,11 @@ VOID UpdateStatusBar( BOOL fForceUpdate );
 
 /* EXTERN procs */
 /* procs in notepad.c */
-VOID
-PASCAL
-SetPageSetupDefaults(
-    VOID
-    );
+//VOID
+//PASCAL
+//SetPageSetupDefaults(
+//    VOID
+//    );
 
 BOOL far PASCAL SaveAsDlgHookProc (HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -374,18 +373,18 @@ INT_PTR CALLBACK AbortDlgProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
 INT    NpPrint( PRINT_DIALOG_TYPE type );
 INT    NpPrintGivenDC( HDC hPrintDC );
 
-UINT_PTR
-CALLBACK
-PageSetupHookProc(
-    HWND hWnd,
-    UINT Message,
-    WPARAM wParam,
-    LPARAM lParam
-    );
+//UINT_PTR
+//CALLBACK
+//PageSetupHookProc(
+//    HWND hWnd,
+//    UINT Message,
+//    WPARAM wParam,
+//    LPARAM lParam
+//    );
 
-HANDLE GetPrinterDC (VOID);
-HANDLE GetNonDefPrinterDC (VOID);
-VOID   PrintIt(PRINT_DIALOG_TYPE type);
+//HANDLE GetPrinterDC (VOID);
+//HANDLE GetNonDefPrinterDC (VOID);
+//VOID   PrintIt(PRINT_DIALOG_TYPE type);
 
 
 /* procs in nputf.c */

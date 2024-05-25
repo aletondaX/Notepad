@@ -646,7 +646,7 @@
 #define VK_ESCAPE                       0x1B
 #define WM_DEVMODECHANGE                0x001B
 //#define LANG_SLOVAK                     0x1b
-#define M_STATUSBAR                     27
+//#define M_STATUSBAR                     27
 #define IDS_ERRUNICODE                  27
 #define VK_CONVERT                      0x1C
 #define WM_ACTIVATEAPP                  0x001C
@@ -1453,10 +1453,10 @@
 #define FORMATDLGORD31                  1543
 #define FORMATDLGORD30                  1544
 #define RUNDLGORD                       1545
-#define PAGESETUPDLGORD                 1546
+//#define PAGESETUPDLGORD                 1546
 #define NEWFILEOPENORD                  1547
-#define PRINTDLGEXORD                   1549
-#define PAGESETUPDLGORDMOTIF            1550
+//#define PRINTDLGEXORD                   1549
+//#define PAGESETUPDLGORDMOTIF            1550
 #define COLORMGMTDLGORD                 1551
 #define NEWFILEOPENV2ORD                1552
 #define NEWFILEOPENV3ORD                1553

@@ -374,14 +374,14 @@ BOOL NpReCreate( long style )
 
     // redraw the status bar
 
-    if( fStatus )
+    /*if( fStatus )
     {
         RECT rcClient;
         GetClientRect(hwndNP, &rcClient);
         NPSize(rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
         UpdateStatusBar( TRUE );
         ShowWindow( hwndStatus, SW_SHOW );
-   }
+   }*/
 
     return TRUE;
 }

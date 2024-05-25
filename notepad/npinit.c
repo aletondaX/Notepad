@@ -9,11 +9,6 @@
 
 #include "precomp.h"
 
-
-TCHAR chPageText[2][PT_LEN];    /* Strings to hold PageSetup items.        */
-TCHAR chPageTextTemp[2][PT_LEN];
-TCHAR szPrinterName[256];       /* String to hold printername for PrintTo verb */
-
 static NP_FILETYPE fInitFileType;     /* file type override                      */
 static INT fSaveWindowPositions=0;    /* true if we are to save window position  */
 
@@ -106,10 +101,8 @@ VOID RegGetString( HKEY hKey, PTCHAR pszKey, PTCHAR pszDefault, PTCHAR pszResult
     }
 }
 
-
 // lfHeight is calculated using PointSize
 // lfWidth set by font mapper
-
 
 VOID SaveGlobals(VOID)
 {
@@ -136,17 +129,10 @@ VOID SaveGlobals(VOID)
     RegWriteInt( hKey, TEXT("lfPitchAndFamily"), FontStruct.lfPitchAndFamily);
     RegWriteInt( hKey, TEXT("iPointSize"),       iPointSize); // 110?
     RegWriteInt( hKey, TEXT("fWrap"),            fWrap);
-    RegWriteInt( hKey, TEXT("StatusBar"),        fStatus);
+    //RegWriteInt( hKey, TEXT("StatusBar"),        fStatus);
     RegWriteInt( hKey, TEXT("fSaveWindowPositions"),fSaveWindowPositions );
 
     RegWriteString( hKey, TEXT("lfFaceName"), FontStruct.lfFaceName); // Consolas?
-
-    RegWriteString( hKey, TEXT("szHeader"),  chPageText[HEADER] );
-    RegWriteString( hKey, TEXT("szTrailer"), chPageText[FOOTER] );
-    /*RegWriteInt( hKey, TEXT("iMarginTop"),    g_PageSetupDlg.rtMargin.top );
-    RegWriteInt( hKey, TEXT("iMarginBottom"), g_PageSetupDlg.rtMargin.bottom );
-    RegWriteInt( hKey, TEXT("iMarginLeft"),   g_PageSetupDlg.rtMargin.left );
-    RegWriteInt( hKey, TEXT("iMarginRight"),  g_PageSetupDlg.rtMargin.right );*/
 
     RegWriteInt( hKey, TEXT("fMLE_is_broken"), fMLE_is_broken );
 
@@ -162,7 +148,6 @@ VOID SaveGlobals(VOID)
 
     RegCloseKey( hKey );
 }
-
 
 // GetGlobals
 //
@@ -197,8 +182,6 @@ VOID GetGlobals( VOID )
     }
     FontStruct.lfWidth= 0;
 
-
-
     FontStruct.lfEscapement=     (LONG)RegGetInt( hKey, TEXT("lfEscapement"),     lfDef.lfEscapement);
     FontStruct.lfOrientation=    (LONG)RegGetInt( hKey, TEXT("lfOrientation"),    lfDef.lfOrientation);
     FontStruct.lfWeight=         (LONG)RegGetInt( hKey, TEXT("lfWeight"),         lfDef.lfWeight);
@@ -231,13 +214,13 @@ VOID GetGlobals( VOID )
 
     iPointSize= RegGetInt( hKey, TEXT("iPointSize"), 110);
     fWrap=      RegGetInt( hKey, TEXT("fWrap"),      0);
-    fStatus=    RegGetInt( hKey, TEXT("StatusBar"),  0);
+    //fStatus=    RegGetInt( hKey, TEXT("StatusBar"),  0);
     fSaveWindowPositions= RegGetInt( hKey, TEXT("fSaveWindowPositions"), 0 );
 
     // if page settings not in registry, we will use defaults
 
-    RegGetString( hKey, TEXT("szHeader"),  chPageText[HEADER], chPageText[HEADER], PT_LEN );
-    RegGetString( hKey, TEXT("szTrailer"), chPageText[FOOTER], chPageText[FOOTER], PT_LEN );
+    //RegGetString( hKey, TEXT("szHeader"),  chPageText[HEADER], chPageText[HEADER], PT_LEN );
+    //RegGetString( hKey, TEXT("szTrailer"), chPageText[FOOTER], chPageText[FOOTER], PT_LEN );
 
     //g_PageSetupDlg.rtMargin.top=    (LONG)RegGetInt( hKey, TEXT("iMarginTop"),    g_PageSetupDlg.rtMargin.top );
     //g_PageSetupDlg.rtMargin.bottom= (LONG)RegGetInt( hKey, TEXT("iMarginBottom"), g_PageSetupDlg.rtMargin.bottom );
@@ -251,7 +234,6 @@ VOID GetGlobals( VOID )
     g_WPDX=   RegGetInt( hKey, TEXT("iWindowPosDX"), CW_USEDEFAULT );
     g_WPDY=   RegGetInt( hKey, TEXT("iWindowPosDY"), CW_USEDEFAULT );
     
-
     fMLE_is_broken= RegGetInt( hKey, TEXT("fMLE_is_broken"), FALSE );  // assume edit control works
 
     if( hKey )
@@ -268,8 +250,7 @@ VOID GetGlobals( VOID )
  * are equal, we will return 0.  Otherwise not 0.
  */
 
-static
-INT lstrncmpi( PTCHAR sz1, PTCHAR sz2 )
+static INT lstrncmpi( PTCHAR sz1, PTCHAR sz2 )
 {
     TCHAR ch1, ch2;
     while( *sz1 )
@@ -392,7 +373,6 @@ INT SizeStrings(HANDLE hInstance)
     return( total );
 }
 
-
 /* InitStrings - Get all text strings from resource file */
 BOOL InitStrings (HANDLE hInstance)
 {
@@ -434,8 +414,8 @@ BOOL InitStrings (HANDLE hInstance)
 
     /* Get header and footer strings */
 
-    lstrcpyn( chPageText[HEADER], szHeader, PT_LEN ); 
-    lstrcpyn( chPageText[FOOTER], szFooter, PT_LEN ); 
+    //lstrcpyn( chPageText[HEADER], szHeader, PT_LEN ); 
+    //lstrcpyn( chPageText[FOOTER], szFooter, PT_LEN ); 
 
     chMerge= *szMerge;
     return (TRUE);
@@ -587,36 +567,6 @@ BOOL ProcessShellOptions (LPTSTR lpszCmdLine, int cmdShow)
     /* Get the filename; have the pointer to the end of the filename */
     lpszAfterFileName= GetFileName (szFileName, lpszCmdLine) + 1;
 
-    if (!bDefPrinter)
-    {
-        UINT index;
- 
-        /* extract the printer name from the command line. */
-        if (!*lpszAfterFileName)
-            return FALSE;
-
-        lpszAfterFileName = SkipBlanks( lpszAfterFileName );
-
-        /* (since we are passing multiple arguments here, the filename, */
-        /* the printername have to be in quotes. */
-        if( *lpszAfterFileName != TEXT('\"') )
-            return FALSE;
-
-        // Copy over printername
-        lpszAfterFileName++;            // skip over quote 
-        index= 0;
-        while( *(lpszAfterFileName)              && 
-               *lpszAfterFileName != TEXT('\"' ) &&
-               (index+1 < sizeof(szPrinterName)/sizeof(szPrinterName[0]) ) )
-        {
-            szPrinterName[index++] = *lpszAfterFileName++;
-        }
-
-        // NULL terminate the printername (no embedded quotes allowed in printernames)
-        szPrinterName[index] = TEXT('\0');
-    }
-
-
     fp= CreateFile( szFileName,             // filename
                     GENERIC_READ,           // access mode
                     FILE_SHARE_READ|FILE_SHARE_WRITE,  // share mode
@@ -658,19 +608,6 @@ BOOL ProcessShellOptions (LPTSTR lpszCmdLine, int cmdShow)
 
     /* load the file into the edit control */
     LoadFile( szFileName, fInitFileType );         // get print file
-
-
-    /* print the file */
-
-    /*if (bDefPrinter)
-    {
-        PrintIt( DoNotUseDialog );
-    }
-    else
-    {
-        PrintIt( NoDialogNonDefault );
-    }*/
-
 
     return (TRUE);
 }
@@ -729,7 +666,6 @@ int CALLBACK EnumProc(
     return( 0 );  // stop enumeration
 }
 
-
 /* One time initialization */
 INT FAR NPInit (HANDLE hInstance, HANDLE hPrevInstance,
                 LPTSTR lpCmdLine, INT cmdShow)
@@ -745,8 +681,6 @@ INT FAR NPInit (HANDLE hInstance, HANDLE hPrevInstance,
      * Find dialog
      */
     if (!(wFRMsg = RegisterWindowMessage ((LPTSTR)FINDMSGSTRING)))
-         return FALSE;
-    if (!(wHlpMsg = RegisterWindowMessage ((LPTSTR)HELPMSGSTRING)))
          return FALSE;
 
     /* open a global DC to the display */
@@ -779,14 +713,6 @@ INT FAR NPInit (HANDLE hInstance, HANDLE hPrevInstance,
 
     hInstanceNP= hInstance;
 
-    /* init. fields of PRINTDLG struct.. */
-    /* Inserted here since command line print statements are valid. */
-  /*  g_PageSetupDlg.lStructSize   = sizeof(PAGESETUPDLG);
-    g_PageSetupDlg.hDevMode      = NULL;
-    g_PageSetupDlg.hDevNames     = NULL;
-    g_PageSetupDlg.hInstance     = hInstance;
-    SetPageSetupDefaults();*/
-
     //
     // Pick up information saved in registry
     //
@@ -805,8 +731,6 @@ INT FAR NPInit (HANDLE hInstance, HANDLE hPrevInstance,
                          (HMENU)NULL,  // menu or child window
                          hInstance,    // application instance
                          NULL);        // window creation data
-
-    //g_PageSetupDlg.hwndOwner     = hwndNP;
 
     if( !hwndNP )
         return FALSE;
@@ -851,10 +775,10 @@ INT FAR NPInit (HANDLE hInstance, HANDLE hPrevInstance,
 
 
     // create a status window.
-    hwndStatus = CreateStatusWindow ((fStatus?WS_VISIBLE:0)|WS_BORDER|WS_CHILD|WS_CLIPSIBLINGS, TEXT(""), hwndNP, ID_STATUS_WINDOW);
-    if ( !hwndStatus )
-        return FALSE;
-    UpdateStatusBar( TRUE );
+    //hwndStatus = CreateStatusWindow ((fStatus?WS_VISIBLE:0)|WS_BORDER|WS_CHILD|WS_CLIPSIBLINGS, TEXT(""), hwndNP, ID_STATUS_WINDOW);
+    //if ( !hwndStatus )
+    //    return FALSE;
+    //UpdateStatusBar( TRUE );
 
     GetClientRect( hwndStatus, (LPRECT) &rcStatus );
 
@@ -1046,8 +970,6 @@ INT FAR NPInit (HANDLE hInstance, HANDLE hPrevInstance,
        SendMessage( hwndEdit, EM_SCROLLCARET, 0, 0 );
     }
 
-
-
     if (PRIMARYLANGID(LOWORD((DWORD) (INT_PTR) GetKeyboardLayout(0))) == LANG_JAPANESE) {
         /*
          * If current HKL is Japanese, handle the result string at once.
@@ -1094,7 +1016,6 @@ BOOL NPRegister (HANDLE hInstance)
 
     return (TRUE);
 }
-
 
 /* Get Locale info from the Registry, and initialize global vars  */
 

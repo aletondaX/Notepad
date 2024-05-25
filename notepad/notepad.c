@@ -23,10 +23,9 @@ TCHAR    szSearch[CCHKEYMAX];           /* Search string                     */
 TCHAR    szReplace[CCHKEYMAX];          /* replace string                    */
 
 BOOL     fUntitled = TRUE;              /* TRUE iff notepad has no title                  */
-BOOL     fStatus = FALSE;                /* status bar shown?                              */
+//BOOL     fStatus = FALSE;               /* status bar shown?                              */
 BOOL     fLastStatus = FALSE;           /* status bar status when wordwrap was turned off */
 INT      dyStatus;                      /* height of status bar                           */
-
 
 HMENU    hSysMenuSetup;                 /* Save Away for disabled Minimize   */
 
@@ -53,13 +52,11 @@ NP_FILETYPE g_ftOpenedAs=FT_UNKNOWN;  /* current file was opened           */
 NP_FILETYPE g_ftSaveAs;               /* current file was opened           */
 
 FINDREPLACE FR;                       /* Passed to FindText()              */
-//PAGESETUPDLG g_PageSetupDlg;
 UINT wFRMsg;                          /* message used in communicating     */
                                       /* with Find/Replace dialog          */
 
 DWORD dwCurrentSelectionStart = 0L;   /* WM_ACTIVATEAPP selection pos      */
 DWORD dwCurrentSelectionEnd   = 0L;   /* WM_ACTIVATEAPP selection pos      */
-UINT wHlpMsg;                         /* message used in invoking help     */
 
 /* Strings loaded from resource file passed to LoadString at initialization time */
 /* To add resource string:
@@ -222,38 +219,38 @@ VOID ReplaceSel( BOOL bView );
 //    g_PageSetupDlg.hDevNames= NULL;
 //}
 
-VOID PASCAL SetPageSetupDefaults( VOID )
-{
-    TCHAR szIMeasure[ 2 ];
-
-    //g_PageSetupDlg.lpfnPageSetupHook= PageSetupHookProc;
-    //g_PageSetupDlg.lpPageSetupTemplateName= MAKEINTRESOURCE(IDD_PAGESETUP);
-
-    GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_IMEASURE, szIMeasure, 2 );
-
-    /*g_PageSetupDlg.Flags= PSD_MARGINS  |
-            PSD_ENABLEPAGESETUPHOOK | PSD_ENABLEPAGESETUPTEMPLATE;*/
-
-    if (szIMeasure[ 0 ] == TEXT( '1' ))
-    {
-        //  English measure (in thousandths of inches).
-        /*g_PageSetupDlg.Flags |= PSD_INTHOUSANDTHSOFINCHES;
-        g_PageSetupDlg.rtMargin.top    = 1000;
-        g_PageSetupDlg.rtMargin.bottom = 1000;
-        g_PageSetupDlg.rtMargin.left   = 750;
-        g_PageSetupDlg.rtMargin.right  = 750;*/
-    }
-    else
-    {
-        //  Metric measure (in hundreths of millimeters).
-        /*g_PageSetupDlg.Flags |= PSD_INHUNDREDTHSOFMILLIMETERS;
-        g_PageSetupDlg.rtMargin.top    = 2500;
-        g_PageSetupDlg.rtMargin.bottom = 2500;
-        g_PageSetupDlg.rtMargin.left   = 2000;
-        g_PageSetupDlg.rtMargin.right  = 2000;*/
-    }
-
-}
+//VOID PASCAL SetPageSetupDefaults( VOID )
+//{
+//    TCHAR szIMeasure[ 2 ];
+//
+//    //g_PageSetupDlg.lpfnPageSetupHook= PageSetupHookProc;
+//    //g_PageSetupDlg.lpPageSetupTemplateName= MAKEINTRESOURCE(IDD_PAGESETUP);
+//
+//    GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_IMEASURE, szIMeasure, 2 );
+//
+//    /*g_PageSetupDlg.Flags= PSD_MARGINS  |
+//            PSD_ENABLEPAGESETUPHOOK | PSD_ENABLEPAGESETUPTEMPLATE;*/
+//
+//    if (szIMeasure[ 0 ] == TEXT( '1' ))
+//    {
+//        //  English measure (in thousandths of inches).
+//        /*g_PageSetupDlg.Flags |= PSD_INTHOUSANDTHSOFINCHES;
+//        g_PageSetupDlg.rtMargin.top    = 1000;
+//        g_PageSetupDlg.rtMargin.bottom = 1000;
+//        g_PageSetupDlg.rtMargin.left   = 750;
+//        g_PageSetupDlg.rtMargin.right  = 750;*/
+//    }
+//    else
+//    {
+//        //  Metric measure (in hundreths of millimeters).
+//        /*g_PageSetupDlg.Flags |= PSD_INHUNDREDTHSOFMILLIMETERS;
+//        g_PageSetupDlg.rtMargin.top    = 2500;
+//        g_PageSetupDlg.rtMargin.bottom = 2500;
+//        g_PageSetupDlg.rtMargin.left   = 2000;
+//        g_PageSetupDlg.rtMargin.right  = 2000;*/
+//    }
+//
+//}
 
 /* Standard window size proc */
 void NPSize (int cxNew, int cyNew)
@@ -272,7 +269,7 @@ void NPSize (int cxNew, int cyNew)
 
     // the height of the edit window depends on whether the status bar is
     // displayed.
-    MoveWindow(hwndEdit, 0, 0, cxNew, cyNew - (fStatus ? dyStatus : 0), TRUE);
+    MoveWindow(hwndEdit, 0, 0, cxNew, cyNew - 0, TRUE);
 }
 
 // NpSaveDialogHookProc
@@ -810,25 +807,25 @@ INT NPCommand(
 
             break;
 
-        case M_STATUSBAR:
+        //case M_STATUSBAR:
 
-            // hide/show the statusbar and also redraw the edit window accordingly.
-            GetClientRect(hwndNP, &rcClient);
+        //    // hide/show the statusbar and also redraw the edit window accordingly.
+        //    GetClientRect(hwndNP, &rcClient);
 
-            if ( fStatus )
-            {
-                fStatus = FALSE;
-                ShowWindow ( hwndStatus, SW_HIDE );
-                NPSize(rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
-            }
-            else
-            {
-                fStatus = TRUE;
-                NPSize(rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
-                UpdateStatusBar( TRUE );
-                ShowWindow( hwndStatus, SW_SHOW );
-            }
-            break;
+        //    if ( fStatus )
+        //    {
+        //        fStatus = FALSE;
+        //        ShowWindow ( hwndStatus, SW_HIDE );
+        //        NPSize(rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
+        //    }
+        //    else
+        //    {
+        //        fStatus = TRUE;
+        //        NPSize(rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
+        //        UpdateStatusBar( TRUE );
+        //        ShowWindow( hwndStatus, SW_SHOW );
+        //    }
+        //    break;
 
         case ID_EDIT:
             break;
@@ -1634,7 +1631,7 @@ VOID NpResetMenu( HWND hwnd )
 
     // check the status bar
 
-    CheckMenuItem (GetSubMenu(hMenu, 3), M_STATUSBAR, fStatus ? MF_CHECKED: MF_UNCHECKED );
+    //CheckMenuItem (GetSubMenu(hMenu, 3), M_STATUSBAR, fStatus ? MF_CHECKED: MF_UNCHECKED );
 
 
 }
