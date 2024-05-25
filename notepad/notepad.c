@@ -1,5 +1,4 @@
 #include "precomp.h"
-// #include <HtmlHelp.h>
 
 #define DeepTrouble() MessageBox(hwndNP, szErrSpace, szNN, MB_SYSTEMMODAL|MB_OK|MB_ICONHAND);
 BOOL MergeStrings(TCHAR*, TCHAR*, TCHAR*);
@@ -8,7 +7,6 @@ UINT     lGotoLine;                     /* line number to goto to */
 
 TCHAR    chMerge;
 HWND     hwndNP = 0;                    /* handle to notepad parent window   */
-HWND     hwndStatus = 0;                /* handle to notepad status window   */
 HWND     hwndEdit = 0;                  /* handle to main text control item  */
 HANDLE   hEdit;                         /* Handle to storage for edit item   */
 HWND     hDlgFind = NULL;               /* handle to modeless FindText window */
@@ -23,9 +21,6 @@ TCHAR    szSearch[CCHKEYMAX];           /* Search string                     */
 TCHAR    szReplace[CCHKEYMAX];          /* replace string                    */
 
 BOOL     fUntitled = TRUE;              /* TRUE iff notepad has no title                  */
-//BOOL     fStatus = FALSE;               /* status bar shown?                              */
-BOOL     fLastStatus = FALSE;           /* status bar status when wordwrap was turned off */
-INT      dyStatus;                      /* height of status bar                           */
 
 HMENU    hSysMenuSetup;                 /* Save Away for disabled Minimize   */
 
@@ -200,57 +195,6 @@ void FileDragOpen(void);
 VOID NpResetMenu(HWND hWnd);
 BOOL SignalCommDlgError(VOID);
 VOID ReplaceSel( BOOL bView );
-
-/* FreeGlobal, frees  all global memory allocated. */
-
-//void NEAR PASCAL FreeGlobal()
-//{
-//    if(g_PageSetupDlg.hDevMode)
-//    {
-//        GlobalFree(g_PageSetupDlg.hDevMode);
-//    }
-//
-//    if(g_PageSetupDlg.hDevNames)
-//    {
-//        GlobalFree(g_PageSetupDlg.hDevNames);
-//    }
-//
-//    g_PageSetupDlg.hDevMode=  NULL; // make sure they are zero for PrintDlg
-//    g_PageSetupDlg.hDevNames= NULL;
-//}
-
-//VOID PASCAL SetPageSetupDefaults( VOID )
-//{
-//    TCHAR szIMeasure[ 2 ];
-//
-//    //g_PageSetupDlg.lpfnPageSetupHook= PageSetupHookProc;
-//    //g_PageSetupDlg.lpPageSetupTemplateName= MAKEINTRESOURCE(IDD_PAGESETUP);
-//
-//    GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_IMEASURE, szIMeasure, 2 );
-//
-//    /*g_PageSetupDlg.Flags= PSD_MARGINS  |
-//            PSD_ENABLEPAGESETUPHOOK | PSD_ENABLEPAGESETUPTEMPLATE;*/
-//
-//    if (szIMeasure[ 0 ] == TEXT( '1' ))
-//    {
-//        //  English measure (in thousandths of inches).
-//        /*g_PageSetupDlg.Flags |= PSD_INTHOUSANDTHSOFINCHES;
-//        g_PageSetupDlg.rtMargin.top    = 1000;
-//        g_PageSetupDlg.rtMargin.bottom = 1000;
-//        g_PageSetupDlg.rtMargin.left   = 750;
-//        g_PageSetupDlg.rtMargin.right  = 750;*/
-//    }
-//    else
-//    {
-//        //  Metric measure (in hundreths of millimeters).
-//        /*g_PageSetupDlg.Flags |= PSD_INHUNDREDTHSOFMILLIMETERS;
-//        g_PageSetupDlg.rtMargin.top    = 2500;
-//        g_PageSetupDlg.rtMargin.bottom = 2500;
-//        g_PageSetupDlg.rtMargin.left   = 2000;
-//        g_PageSetupDlg.rtMargin.right  = 2000;*/
-//    }
-//
-//}
 
 /* Standard window size proc */
 void NPSize (int cxNew, int cyNew)
@@ -552,8 +496,6 @@ VOID GotoAndScrollInView( INT OneBasedLineNumber )
 
 }
 
-
-
 /* ** Notepad command proc - called whenever notepad gets WM_COMMAND
       message.  wParam passed as cmd */
 INT NPCommand(
@@ -565,8 +507,6 @@ INT NPCommand(
     LONG     lSel;
     TCHAR    szNewName[MAX_PATH] = TEXT("");      /* New file name */
     LONG     style;
-    //DWORD    rc;
-    RECT     rcClient;
 
     switch (LOWORD(wParam))
     {
@@ -807,26 +747,6 @@ INT NPCommand(
 
             break;
 
-        //case M_STATUSBAR:
-
-        //    // hide/show the statusbar and also redraw the edit window accordingly.
-        //    GetClientRect(hwndNP, &rcClient);
-
-        //    if ( fStatus )
-        //    {
-        //        fStatus = FALSE;
-        //        ShowWindow ( hwndStatus, SW_HIDE );
-        //        NPSize(rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
-        //    }
-        //    else
-        //    {
-        //        fStatus = TRUE;
-        //        NPSize(rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
-        //        UpdateStatusBar( TRUE );
-        //        ShowWindow( hwndStatus, SW_SHOW );
-        //    }
-        //    break;
-
         case ID_EDIT:
             break;
 
@@ -835,7 +755,6 @@ INT NPCommand(
     }
     return TRUE;
 }
-
 
 // for some reason, this procedure tries to maintain
 // a valid 'fp' even though I believe it does not need
@@ -871,7 +790,6 @@ void FileDragOpen(void)
        }
     }
 }
-
 
 /* Proccess file drop/drag options. */
 void doDrop (WPARAM wParam, HWND hwnd)
@@ -988,7 +906,6 @@ SaveFilePrompt:
     return (mdResult != IDCANCEL);
 }
 
-
 /* Notepad window class procedure */
 LRESULT FAR NPWndProc(
         HWND       hwnd,
@@ -1054,7 +971,7 @@ LRESULT FAR NPWndProc(
                 if(!WinHelp(hwndNP, (LPTSTR)szHelpFile, HELP_QUIT, 0))
                     DeepTrouble();
 
-                DestroyWindow(hwndStatus);
+                //DestroyWindow(hwndStatus);
                 DestroyWindow(hwndNP);
                 DeleteObject(hFont);
             }
@@ -1130,12 +1047,12 @@ LRESULT FAR NPWndProc(
                 case SIZEFULLSCREEN:
 
                     // resize the status window.
-                    SendMessage (hwndStatus, WM_SIZE, 0, 0L);
+                    //SendMessage (hwndStatus, WM_SIZE, 0, 0L);
                     iParts[0] = 3 * (MAKEPOINTS(lParam).x)/4;
                     iParts[1] = -1;
 
                     // Divide the status window into two parts
-                    SendMessage(hwndStatus, SB_SETPARTS, (WPARAM) sizeof(iParts)/sizeof(INT), (LPARAM) &iParts[0]); 
+                    //SendMessage(hwndStatus, SB_SETPARTS, (WPARAM) sizeof(iParts)/sizeof(INT), (LPARAM) &iParts[0]); 
 
                     NPSize(MAKEPOINTS(lParam).x, MAKEPOINTS(lParam).y);
                     break;
@@ -1267,7 +1184,7 @@ LRESULT FAR NPWndProc(
                    //
                    SendMessage( hwndEdit, EM_SETSEL, 0, 0 );
                    SendMessage( hwndEdit, EM_SCROLLCARET, 0, 0);
-                   UpdateStatusBar( TRUE );
+                   //UpdateStatusBar( TRUE );
 
                 }
                 else if (dwFlags & FR_DIALOGTERM)
@@ -1365,10 +1282,6 @@ INT WINAPI WinMain(
         }
     }
 
-    /* Clean up any global allocations */
-
-    /*FreeGlobal();*/
-
     LocalFree( hEdit );
 
     if (hEventHook)
@@ -1393,42 +1306,12 @@ UnRegisterPenWindows:
 static DWORD iLastCol;
 static DWORD iLastLine;
 
-VOID UpdateStatusBar( BOOL fForceStatus )
-{
-    DWORD SelStart, SelEnd;
-    UINT  iLine, iCol;
-    TCHAR szStatusText[128];
-
-    // get the current caret position.
-    SendMessage(hwndEdit,EM_GETSEL,(WPARAM) &SelStart,(WPARAM)&SelEnd);
-
-    // the line numbers are 1 based instead 0 based. hence add 1.
-    iLine = (UINT)SendMessage( hwndEdit, EM_LINEFROMCHAR, SelStart, 0 ) + 1;
-    iCol = SelStart - (UINT)SendMessage( hwndEdit, EM_LINEINDEX, iLine-1, 0 ) + 1;
-
-    // don't bother to update status if it hasn't changed
-    if( fForceStatus || (iCol!=iLastCol) || (iLine!=iLastLine) )
-    {
-        // prepare and display the statusbar.
-        // make sure you don't overflow the buffer boundary.
-        _sntprintf(szStatusText, sizeof(szStatusText)/sizeof(TCHAR) -1, szLineCol, iLine, iCol);
-        szStatusText[ sizeof(szStatusText)/sizeof(TCHAR) -1 ] = TEXT('\0');
-        SetStatusBarText(szStatusText, 1);
-            
-    }
-
-    iLastCol=  iCol;
-    iLastLine= iLine;
-
-};
-
 VOID CALLBACK WinEventFunc(HWINEVENTHOOK hWinEventHook, DWORD event, HWND hwnd, LONG idObject,
                       LONG idChild, DWORD dwEventThread, DWORD dwmsEventTime)
 {
-    UpdateStatusBar( FALSE );
+    //UpdateStatusBar( FALSE );
 
 }
-
 
 #define MAX_UNTITLED_LENGTH 50   /* max chars of "untitled" */
 
@@ -1524,12 +1407,6 @@ void FAR SetTitle( TCHAR  *sz )
 
     }
 
-    // set the status bar. the Line and Col count is 1 initially for
-    // the newly opened file as the caret position is at the first character.
-    // SetStatusBarText(szStatusText, 0);
-    _sntprintf(szStatusText, sizeof(szStatusText)/sizeof(TCHAR) -1, szLineCol, 1, 1);
-    SetStatusBarText(szStatusText, 1);
-
     lstrcat(szWindowText, szNpTitle);
     SetWindowText(hwndNP, (LPTSTR)szWindowText);
 
@@ -1615,11 +1492,6 @@ VOID NpResetMenu( HWND hwnd )
     EnableMenuItem( GetSubMenu(hMenu,1), M_FIND,     mfcc );
     EnableMenuItem( GetSubMenu(hMenu,1), M_FINDNEXT, mfcc );
 
-
-    // enable 'goto' iff wordwrap is off;  MLE doesn't give good results if word wrap on
-
-    //EnableMenuItem(GetSubMenu(hMenu, 1), M_GOTO, fWrap ? MF_GRAYED : MF_ENABLED );
-
     // enable Undo only if editcontrol says we can do it.
 
     fCanUndo = (BOOL) SendMessage(hwndEdit, EM_CANUNDO, 0, 0L);
@@ -1627,15 +1499,8 @@ VOID NpResetMenu( HWND hwnd )
 
     // check the word wrap item correctly
 
-    CheckMenuItem(GetSubMenu(hMenu, 2), M_WW, fWrap ? MF_CHECKED : MF_UNCHECKED);
-
-    // check the status bar
-
-    //CheckMenuItem (GetSubMenu(hMenu, 3), M_STATUSBAR, fStatus ? MF_CHECKED: MF_UNCHECKED );
-
-
+    CheckMenuItem(GetSubMenu(hMenu, 1), M_WW, fWrap ? MF_CHECKED : MF_UNCHECKED);
 }
-
 
 void FAR NpWinIniChange(VOID)
 {
@@ -1853,18 +1718,6 @@ VOID ReplaceSel( BOOL bView )
     LocalUnlock( hEText );
 }
 
-// GotoDlgProc
-//
-// Handle the Goto Dialog window processing
-//
-// Returns:
-//
-// 1 if successfull
-// 0 if not (cancelled)
-//
-// Modifies global lGotoLine
-//
-
 const DWORD s_GotoHelpIDs[] = {
     IDC_GOTO, IDH_GOTO,
     0, 0
@@ -2033,8 +1886,3 @@ NP_FILETYPE fDetermineFileType(LPBYTE lpFileContents, UINT iSize)
     return ftFileType;
 
 }
-
-
-
-
-

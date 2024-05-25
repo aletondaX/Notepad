@@ -240,7 +240,7 @@ BOOL Search (TCHAR * szKey)
         if( !(FR.Flags & FR_REPLACEALL) )
         {
             SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
-            UpdateStatusBar( TRUE );
+            //UpdateStatusBar( TRUE );
         }
         bStatus= TRUE;   // found
     }

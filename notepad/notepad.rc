@@ -12,14 +12,14 @@
 
 #define VER_COMPANYNAME_STR         "AleTonda"
 #define VER_FILEDESCRIPTION_STR     "Bloc de notas"
-#define VER_FILEVERSION             1,1,0,0
-#define VER_FILEVERSION_STR         "1.1.0.0"
+#define VER_FILEVERSION             1,2,0,0
+#define VER_FILEVERSION_STR         "1.2.0.0"
 #define VER_INTERNALNAME_STR        "Bloc de notas"
 #define VER_LEGALCOPYRIGHT_STR      "AleTonda 2024"
 #define VER_ORIGINALFILENAME_STR    "notepad.exe"
 #define VER_PRODUCTNAME_STR         "Bloc de notas"
-#define VER_PRODUCTVERSION          1,1,0,0
-#define VER_PRODUCTVERSION_STR      "1.1.0.0"
+#define VER_PRODUCTVERSION          1,2,0,0
+#define VER_PRODUCTVERSION_STR      "1.2.0.0"
 #define VER_COMMENTS_STR            "https://github.com/aletondaX/Notepad"
 
 #ifndef DEBUG
@@ -98,13 +98,13 @@ MENUITEM    "Reemplazar...\tCtrl+H / Ctrl+R", M_REPLACE
 MENUITEM    SEPARATOR
 MENUITEM    "Seleccionar todo\tCtrl+A / Ctrl+E", M_SELECTALL
 MENUITEM    "Insertar fecha y hora\tF5", M_DATETIME
+MENUITEM    "Ajuste de línea"       M_WW
 END
 
-POPUP   "Formato"
-BEGIN
-MENUITEM    "Ajuste de línea"       M_WW
+//POPUP   "Formato"
+//BEGIN
 //MENUITEM    "Fuente...", M_SETFONT
-END
+//END
 
 //POPUP   "Ver"
 //BEGIN

@@ -129,7 +129,6 @@ VOID SaveGlobals(VOID)
     RegWriteInt( hKey, TEXT("lfPitchAndFamily"), FontStruct.lfPitchAndFamily);
     RegWriteInt( hKey, TEXT("iPointSize"),       iPointSize); // 110?
     RegWriteInt( hKey, TEXT("fWrap"),            fWrap);
-    //RegWriteInt( hKey, TEXT("StatusBar"),        fStatus);
     RegWriteInt( hKey, TEXT("fSaveWindowPositions"),fSaveWindowPositions );
 
     RegWriteString( hKey, TEXT("lfFaceName"), FontStruct.lfFaceName); // Consolas?
@@ -214,18 +213,7 @@ VOID GetGlobals( VOID )
 
     iPointSize= RegGetInt( hKey, TEXT("iPointSize"), 110);
     fWrap=      RegGetInt( hKey, TEXT("fWrap"),      0);
-    //fStatus=    RegGetInt( hKey, TEXT("StatusBar"),  0);
     fSaveWindowPositions= RegGetInt( hKey, TEXT("fSaveWindowPositions"), 0 );
-
-    // if page settings not in registry, we will use defaults
-
-    //RegGetString( hKey, TEXT("szHeader"),  chPageText[HEADER], chPageText[HEADER], PT_LEN );
-    //RegGetString( hKey, TEXT("szTrailer"), chPageText[FOOTER], chPageText[FOOTER], PT_LEN );
-
-    //g_PageSetupDlg.rtMargin.top=    (LONG)RegGetInt( hKey, TEXT("iMarginTop"),    g_PageSetupDlg.rtMargin.top );
-    //g_PageSetupDlg.rtMargin.bottom= (LONG)RegGetInt( hKey, TEXT("iMarginBottom"), g_PageSetupDlg.rtMargin.bottom );
-    //g_PageSetupDlg.rtMargin.left=   (LONG)RegGetInt( hKey, TEXT("iMarginLeft"),   g_PageSetupDlg.rtMargin.left );
-    //g_PageSetupDlg.rtMargin.right=  (LONG)RegGetInt( hKey, TEXT("iMarginRight"),  g_PageSetupDlg.rtMargin.right );
 
     // if window positions in registry use them, otherwise us defaults
 
@@ -240,7 +228,6 @@ VOID GetGlobals( VOID )
     {
         RegCloseKey( hKey );
     }
-
 }
 
 /*
@@ -412,11 +399,6 @@ BOOL InitStrings (HANDLE hInstance)
        cchRemaining -= cch;
     }
 
-    /* Get header and footer strings */
-
-    //lstrcpyn( chPageText[HEADER], szHeader, PT_LEN ); 
-    //lstrcpyn( chPageText[FOOTER], szFooter, PT_LEN ); 
-
     chMerge= *szMerge;
     return (TRUE);
 }
@@ -433,7 +415,6 @@ PTCHAR SkipBlanks( PTCHAR pszText )
 
     return pszText;
 }
-
 
 // if /.SETUP option exists in the command line process it.
 BOOL ProcessSetupOption (LPTSTR lpszCmdLine)
@@ -540,15 +521,7 @@ BOOL ProcessShellOptions (LPTSTR lpszCmdLine, int cmdShow)
     BOOL   bDefPrinter = TRUE;
     LPTSTR lpszAfterFileName;
 
-
-    // Is it PrintTo ?
-    if( lstrncmpi( TEXT("/PT"), lpszCmdLine ) == 0)
-    {
-        lpszCmdLine= SkipBlanks( lpszCmdLine+3 );
-        bDefPrinter = FALSE;
-    }
-    // Or is it Print ?
-    else if ( lstrncmpi( TEXT("/P"), lpszCmdLine ) == 0)
+    if ( lstrncmpi( TEXT("/P"), lpszCmdLine ) == 0)
     {
         lpszCmdLine= SkipBlanks( lpszCmdLine+2 );
     }
@@ -773,23 +746,11 @@ INT FAR NPInit (HANDLE hInstance, HANDLE hPrevInstance,
                      hwndNP, (HMENU)ID_EDIT, hInstance, (LPVOID)NULL)))
         return FALSE;
 
-
-    // create a status window.
-    //hwndStatus = CreateStatusWindow ((fStatus?WS_VISIBLE:0)|WS_BORDER|WS_CHILD|WS_CLIPSIBLINGS, TEXT(""), hwndNP, ID_STATUS_WINDOW);
-    //if ( !hwndStatus )
-    //    return FALSE;
-    //UpdateStatusBar( TRUE );
-
-    GetClientRect( hwndStatus, (LPRECT) &rcStatus );
-
-    // determine height of statusbar window and save...
-    dyStatus = rcStatus.bottom - rcStatus.top;
-
     iParts[0] = 3 * (rcStatus.right-rcStatus.left)/4;
     iParts[1] = -1;
 
     // Divide the status window into two parts
-    SendMessage(hwndStatus, SB_SETPARTS, (WPARAM) sizeof(iParts)/sizeof(INT), (LPARAM) &iParts[0]); 
+    //SendMessage(hwndStatus, SB_SETPARTS, (WPARAM) sizeof(iParts)/sizeof(INT), (LPARAM) &iParts[0]); 
  
 
     // handle word wrap now if set in registry

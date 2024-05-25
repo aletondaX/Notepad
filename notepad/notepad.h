@@ -211,7 +211,7 @@ extern HANDLE hFont;
 extern HANDLE hAccel;
 extern HANDLE hInstanceNP;
 extern HANDLE hStdCursor, hWaitCursor;
-extern HWND   hwndNP, hwndEdit, hwndStatus;
+extern HWND   hwndNP, hwndEdit;
 
 extern LOGFONT  FontStruct;
 extern INT      iPointSize;
@@ -296,13 +296,13 @@ extern UINT   wFRMsg;           /* message used in communicating    */
 
 extern HMENU hSysMenuSetup;     /* Save Away for disabled Minimize   */
 //extern BOOL  fStatus;   // COMENTAR AL ÚLTIMO
-extern INT   dyStatus;
+//extern INT   dyStatus;
 
 
 /* Macro for setting status bar - x is the text to set and n is the part number
    in the statusbar */
-#define SetStatusBarText(x, n) if(hwndStatus)SendMessage(hwndStatus, SB_SETTEXT, n, (LPARAM)(LPTSTR)(x));
-VOID UpdateStatusBar( BOOL fForceUpdate );
+//#define SetStatusBarText(x, n) if(hwndStatus)SendMessage(hwndStatus, SB_SETTEXT, n, (LPARAM)(LPTSTR)(x));
+//VOID UpdateStatusBar( BOOL fForceUpdate );
 
 
 
