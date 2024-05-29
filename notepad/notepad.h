@@ -250,7 +250,7 @@ extern TCHAR   *szUntitled, *szNpTitle, *szNN, *szErrSpace;
 extern TCHAR   *szErrUnicode;
 extern TCHAR  **rgsz[];          /* More strings. */
 extern TCHAR   *szNVF;
-extern TCHAR   *szPDIE;
+//extern TCHAR   *szPDIE;
 extern TCHAR   *szDiskError;
 extern TCHAR   *szCREATEERR;
 extern TCHAR   *szWE;
@@ -323,8 +323,8 @@ LRESULT FAR NPWndProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 void FAR SetTitle (TCHAR *sz);
 INT FAR  AlertBox (HWND hwndParent, TCHAR *szCaption, TCHAR *szText1,
                    TCHAR *szText2, UINT style);
-void FAR NpWinIniChange (VOID);
-void FAR FreeGlobalPD (void);
+//void FAR NpWinIniChange (VOID);
+//void FAR FreeGlobalPD (void);
 INT_PTR CALLBACK GotoDlgProc(HWND hDlg,UINT message,WPARAM wParam,LPARAM lParam);
 VOID CALLBACK WinEventFunc(HWINEVENTHOOK hWinEventHook, DWORD event, HWND hwnd, LONG idObject,
                       LONG idChild, DWORD dwEventThread, DWORD dwmsEventTime);
@@ -350,7 +350,7 @@ VOID FAR  AlertUser_FileFail( LPTSTR szFileName );
 /* procs in npinit.c */
 INT FAR  NPInit (HANDLE hInstance, HANDLE hPrevInstance,
                  LPTSTR lpCmdLine, INT cmdShow);
-void FAR InitLocale (VOID);
+//void FAR InitLocale (VOID);
 void SaveGlobals( VOID );
 
 /* procs in npmisc.c */

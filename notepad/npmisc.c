@@ -214,11 +214,13 @@ BOOL Search (TCHAR * szKey)
         if( !(FR.Flags & FR_REPLACEALL) )
         {
             HANDLE hPrevCursor= SetCursor( hStdCursor );
-            AlertBox( hDlgFind ? hDlgFind : hwndNP,
-                      szNN,
-                      szCFS,
-                      szSearch,
-                      MB_APPLMODAL | MB_OK | MB_ICONINFORMATION);
+            //AlertBox( hDlgFind ? hDlgFind : hwndNP,
+            //          szNN,
+            //          szCFS,
+            //          szSearch,
+            //          MB_APPLMODAL | MB_OK | MB_ICONINFORMATION);
+            SendMessage(hwndEdit, EM_SETSEL, 0, 0);
+            SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);    //aletonda
             SetCursor( hPrevCursor );
         }
     }

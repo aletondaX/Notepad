@@ -20,7 +20,7 @@ TCHAR    szFileName[MAX_PATH];          /* Current notepad filename          */
 TCHAR    szSearch[CCHKEYMAX];           /* Search string                     */
 TCHAR    szReplace[CCHKEYMAX];          /* replace string                    */
 
-BOOL     fUntitled = TRUE;              /* TRUE iff notepad has no title                  */
+BOOL     fUntitled = TRUE;              /* TRUE if notepad has no title                  */
 
 HMENU    hSysMenuSetup;                 /* Save Away for disabled Minimize   */
 
@@ -112,7 +112,6 @@ TCHAR *szReadOnlyFile   = (TCHAR*) IDS_READONLY_FILE;
 TCHAR *szSystemFile     = (TCHAR*) IDS_SYSTEM_FILE;      
 TCHAR *szFile           = (TCHAR*) IDS_FILE;             
 
-
 TCHAR **rgsz[CSTRINGS] = {
         &szDiskError,
         &szFNF,
@@ -161,9 +160,7 @@ TCHAR **rgsz[CSTRINGS] = {
         &szLetters,
 };
 
-
 HANDLE   fp;          /* file pointer */
-
 
 #if 0
 VOID DisplayFont( LOGFONT* pf )
@@ -222,13 +219,6 @@ void NPSize (int cxNew, int cyNew)
 // the file type while saving.
 //
 
-const DWORD s_SaveAsHelpIDs[]=
-    {
-        IDC_FILETYPE, IDH_FILETYPE,
-        IDC_ENCODING, IDH_FILETYPE,
-        0, 0
-    };
-
 UINT_PTR APIENTRY NpSaveDialogHookProc(
     HWND hWnd,
     UINT msg,
@@ -266,22 +256,18 @@ UINT_PTR APIENTRY NpSaveDialogHookProc(
             g_ftSaveAs= (NP_FILETYPE) SendDlgItemMessage( hWnd, IDC_FILETYPE, CB_GETCURSEL, 0, 0 );
             break;
 
-        case WM_HELP:
-            //
-            //  We only want to intercept help messages for controls that we are
-            //  responsible for.
-            //
+        //case WM_HELP:
+        //    //
+        //    //  We only want to intercept help messages for controls that we are
+        //    //  responsible for.
+        //    //
 
-            id = GetDlgCtrlID(((LPHELPINFO) lParam)-> hItemHandle);
+        //    id = GetDlgCtrlID(((LPHELPINFO) lParam)-> hItemHandle);
 
-            if ( id != IDC_FILETYPE && id != IDC_ENCODING)
-                break;
+        //    if ( id != IDC_FILETYPE && id != IDC_ENCODING)
+        //        break;
 
-            WinHelp(((LPHELPINFO) lParam)-> hItemHandle,
-                      szHelpFile,
-                      HELP_WM_HELP,
-                      (ULONG_PTR) s_SaveAsHelpIDs);
-            return TRUE;
+        //    return TRUE;
 
         case WM_CONTEXTMENU:
             //
@@ -307,15 +293,10 @@ UINT_PTR APIENTRY NpSaveDialogHookProc(
             if ( id != IDC_FILETYPE && id != IDC_ENCODING)
                 break;
 
-            WinHelp( (HWND)   wParam,
-                              szHelpFile,
-                              HELP_CONTEXTMENU,
-                      (ULONG_PTR) s_SaveAsHelpIDs);
             return TRUE;
     }
     return( FALSE );
 }
-
 
 // NpOpenDialogHookProc
 //
@@ -361,22 +342,18 @@ UINT_PTR APIENTRY NpOpenDialogHookProc(
             g_ftOpenedAs= (NP_FILETYPE) SendDlgItemMessage( hWnd, IDC_FILETYPE, CB_GETCURSEL, 0, 0 );
             break;
 
-        case WM_HELP:
-            //
-            //  We only want to intercept help messages for controls that we are
-            //  responsible for.
-            //
+        //case WM_HELP:
+        //    //
+        //    //  We only want to intercept help messages for controls that we are
+        //    //  responsible for.
+        //    //
 
-            id = GetDlgCtrlID(((LPHELPINFO) lParam)-> hItemHandle);
+        //    id = GetDlgCtrlID(((LPHELPINFO) lParam)-> hItemHandle);
 
-            if ( id != IDC_FILETYPE && id != IDC_ENCODING)
-                break;
+        //    if ( id != IDC_FILETYPE && id != IDC_ENCODING)
+        //        break;
 
-            WinHelp(((LPHELPINFO) lParam)-> hItemHandle,
-                      szHelpFile,
-                      HELP_WM_HELP,
-                      (ULONG_PTR) s_SaveAsHelpIDs);
-            return TRUE;
+        //    return TRUE;
 
         case WM_CONTEXTMENU:
             //
@@ -402,13 +379,12 @@ UINT_PTR APIENTRY NpOpenDialogHookProc(
             if ( id != IDC_FILETYPE && id != IDC_ENCODING)
                 break;
 
-            WinHelp( (HWND)   wParam,
+            /*WinHelp( (HWND)   wParam,
                               szHelpFile,
                               HELP_CONTEXTMENU,
-                      (ULONG_PTR) s_SaveAsHelpIDs);
+                      (ULONG_PTR) s_SaveAsHelpIDs);*/
             return TRUE;
 
-            
          case WM_NOTIFY:
          {
             LPOFNOTIFY pofn;
@@ -459,16 +435,12 @@ UINT_PTR APIENTRY NpOpenDialogHookProc(
                             // cleanup.
                             lstrcpy(szPrevFileName, szFileName);
                             CloseHandle(hFile);                           
-
                         }
                     }                                    
-
                     break;
                 }
             }
-
          }
-                    
     }
     return( FALSE );
 }
@@ -493,7 +465,6 @@ VOID GotoAndScrollInView( INT OneBasedLineNumber )
         SendMessage( hwndEdit, EM_SETSEL, CharIndex, CharIndex);
         SendMessage( hwndEdit, EM_SCROLLCARET, 0, 0 );
     }
-
 }
 
 /* ** Notepad command proc - called whenever notepad gets WM_COMMAND
@@ -968,8 +939,8 @@ LRESULT FAR NPWndProc(
             if (CheckSave(FALSE))
             {
                 /* Exit help */
-                if(!WinHelp(hwndNP, (LPTSTR)szHelpFile, HELP_QUIT, 0))
-                    DeepTrouble();
+                /*if(!WinHelp(hwndNP, (LPTSTR)szHelpFile, HELP_QUIT, 0))
+                    DeepTrouble();*/
 
                 //DestroyWindow(hwndStatus);
                 DestroyWindow(hwndNP);
@@ -1099,12 +1070,12 @@ LRESULT FAR NPWndProc(
             break;
 
 
-        case WM_WININICHANGE:
+        //case WM_WININICHANGE:
             // Ignore for now.
             // If you put this back in, be sure it handles both
             // the metric change and the decimal change.
             //NpWinIniChange ();
-            break;
+            //break;
 
         case WM_DROPFILES: /*case added 03/26/91 for file drag/drop support*/
             doDrop (wParam,hwnd);
@@ -1358,53 +1329,6 @@ void FAR SetTitle( TCHAR  *sz )
 
        GetFileTitle(szFileName, szWindowText, MAX_PATH);
 
-
-
-       // Removed the left part of the status bar to show file properties.
-       // The correct way to fix it is to make sure that the correct delimiters (like commas),
-       // and correct order is used for various localized builds.
-#ifdef UNUSED_STATUSBARCODE
-       // prepare the status bar text and show 
-       // if the file has any special properties (such as hidden, readonly etc.)
-
-        if (dwAttributes & FILE_ATTRIBUTE_COMPRESSED)
-            if ((lstrlen(szStatusText) + lstrlen(szCompressedFile) + lstrlen(szFile)) < sizeof(szStatusText)/sizeof(TCHAR) - 1)
-                lstrcpy(szStatusText, szCompressedFile);
-
-        if (dwAttributes & FILE_ATTRIBUTE_ENCRYPTED)   
-            if ((lstrlen(szStatusText) + lstrlen(szEncryptedFile) + lstrlen(szFile)) < sizeof(szStatusText)/sizeof(TCHAR) - 1)            
-                lstrcat(szStatusText, szEncryptedFile);
-
-        if (dwAttributes & FILE_ATTRIBUTE_HIDDEN)
-            if ((lstrlen(szStatusText) + lstrlen(szHiddenFile) + lstrlen(szFile)) < sizeof(szStatusText)/sizeof(TCHAR) - 1)            
-                lstrcat(szStatusText, szHiddenFile);
-
-        if (dwAttributes & FILE_ATTRIBUTE_OFFLINE)
-            if ((lstrlen(szStatusText) + lstrlen(szOfflineFile) + lstrlen(szFile)) < sizeof(szStatusText)/sizeof(TCHAR) - 1)            
-                lstrcat(szStatusText, szOfflineFile);
-
-        if (dwAttributes & FILE_ATTRIBUTE_READONLY)
-        {
-            if ((lstrlen(szStatusText) + lstrlen(szReadOnlyFile) + lstrlen(szFile)) < sizeof(szStatusText)/sizeof(TCHAR) - 1)            
-                lstrcat(szStatusText, szReadOnlyFile);
-        }
-
-        if (dwAttributes & FILE_ATTRIBUTE_SYSTEM)
-            if ((lstrlen(szStatusText) + lstrlen(szSystemFile) + lstrlen(szFile)) < sizeof(szStatusText)/sizeof(TCHAR) - 1)            
-                lstrcat(szStatusText, szSystemFile);
-
-        // if the status did get updated by file properties
-        if (*szStatusText != TEXT('\0'))
-        {
-            // get rid of the last comma
-            szStatusText[lstrlen(szStatusText)-1] = TEXT(' ');
-
-            if ((lstrlen(szStatusText) + lstrlen(szFile)) < sizeof(szStatusText)/sizeof(TCHAR) - 1)           
-                lstrcat(szStatusText, szFile);
-        }
-
-#endif
-
     }
 
     lstrcat(szWindowText, szNpTitle);
@@ -1483,14 +1407,14 @@ VOID NpResetMenu( HWND hwnd )
 
     // enable the find/find next iff there is some text in the edit window
 
-    mfcc= MF_GRAYED;
-    if( SendMessage( hwndEdit, WM_GETTEXTLENGTH, 0, 0 ) )
-    {
-        mfcc= MF_ENABLED;
-    }
+    //mfcc= MF_GRAYED;
+    //if( SendMessage( hwndEdit, WM_GETTEXTLENGTH, 0, 0 ) )
+    //{
+    //    mfcc= MF_ENABLED;
+    //}
 
-    EnableMenuItem( GetSubMenu(hMenu,1), M_FIND,     mfcc );
-    EnableMenuItem( GetSubMenu(hMenu,1), M_FINDNEXT, mfcc );
+    //EnableMenuItem( GetSubMenu(hMenu,1), M_FIND,     mfcc );
+    //EnableMenuItem( GetSubMenu(hMenu,1), M_FINDNEXT, mfcc );
 
     // enable Undo only if editcontrol says we can do it.
 
@@ -1500,11 +1424,6 @@ VOID NpResetMenu( HWND hwnd )
     // check the word wrap item correctly
 
     CheckMenuItem(GetSubMenu(hMenu, 1), M_WW, fWrap ? MF_CHECKED : MF_UNCHECKED);
-}
-
-void FAR NpWinIniChange(VOID)
-{
-   InitLocale ();
 }
 
 /* ** Scan sz1 for merge spec.    If found, insert string sz2 at that point.
@@ -1603,7 +1522,6 @@ MAPERROR maperror[]=
 {
     CDERR_DIALOGFAILURE,  &szErrSpace,
     CDERR_INITIALIZATION, &szCommDlgInitErr,
-    CDERR_MEMLOCKFAILURE, &szPDIE,
     CDERR_LOADSTRFAILURE, &szErrSpace,
     CDERR_FINDRESFAILURE, &szErrSpace,
     PDERR_LOADDRVFAILURE, &szLoadDrvFail,
@@ -1748,14 +1666,14 @@ INT_PTR CALLBACK GotoDlgProc(HWND hDlg,UINT message,WPARAM wParam,LPARAM lParam)
 
         // context sensitive help.
         case WM_HELP:
-            WinHelp(((LPHELPINFO) lParam)-> hItemHandle, szHelpFile,
-                HELP_WM_HELP, (ULONG_PTR) (LPVOID) s_GotoHelpIDs);
+            /*WinHelp(((LPHELPINFO) lParam)-> hItemHandle, szHelpFile,
+                HELP_WM_HELP, (ULONG_PTR) (LPVOID) s_GotoHelpIDs);*/
             break;
 
         case WM_CONTEXTMENU:
 
-            WinHelp((HWND) wParam, szHelpFile, HELP_CONTEXTMENU,
-                (ULONG_PTR) (LPVOID) s_GotoHelpIDs);
+            /*WinHelp((HWND) wParam, szHelpFile, HELP_CONTEXTMENU,
+                (ULONG_PTR) (LPVOID) s_GotoHelpIDs);*/
             break;
 
 

@@ -666,7 +666,7 @@ INT FAR NPInit (HANDLE hInstance, HANDLE hPrevInstance,
     if (!InitStrings (hInstance))
         return FALSE;
 
-    InitLocale();     // localize strings etc.
+    //InitLocale();     // localize strings etc.
 
     /* Load the arrow and hourglass cursors. */
     hStdCursor= LoadCursor( NULL,
@@ -980,7 +980,7 @@ BOOL NPRegister (HANDLE hInstance)
 
 /* Get Locale info from the Registry, and initialize global vars  */
 
-void FAR InitLocale (void)
-{
-
-}
+//void FAR InitLocale (void)
+//{
+//
+//}
