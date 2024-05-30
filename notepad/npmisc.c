@@ -219,8 +219,9 @@ BOOL Search (TCHAR * szKey)
             //          szCFS,
             //          szSearch,
             //          MB_APPLMODAL | MB_OK | MB_ICONINFORMATION);
-            SendMessage(hwndEdit, EM_SETSEL, 0, 0);
+            SendMessage(hwndEdit, EM_SETSEL, 0, 0);         //aletonda
             SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);    //aletonda
+            Search(szSearch);                               //aletonda
             SetCursor( hPrevCursor );
         }
     }
