@@ -211,7 +211,7 @@ BOOL Search (TCHAR * szKey)
         //
         // alert user on not finding any text unless it is replace all
         //
-        if( !(FR.Flags & (FR_REPLACEALL || FR_REPLACE)) )
+        if( !(FR.Flags & FR_REPLACEALL) && !(FR.Flags & FR_REPLACE))
         {
             HANDLE hPrevCursor= SetCursor( hStdCursor );
             //AlertBox( hDlgFind ? hDlgFind : hwndNP,
