@@ -230,7 +230,7 @@ IDS_CFS         "No se encontró ""%%"""
 
 	/* Use by MUI, not notepad.  See hivecls.inx for reference */
 
-	IDS_TEXT_FRIENDLY_NAME  "Text Document"
+	IDS_TEXT_FRIENDLY_NAME  "Documento de texto"
 
 	/*  IDS_LETTERS     "fFpPtTdDcCrRlL"   Original US values.  This does get translated! */
 	/*                  The order is: File, Page, Time, Date, Center, Right, Left         */
